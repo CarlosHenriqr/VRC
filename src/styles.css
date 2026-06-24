@@ -1,0 +1,196 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-cloud: var(--cloud);
+  --color-hairline: var(--hairline);
+  --color-sea: var(--sea);
+  --color-aqua: var(--aqua);
+  --color-ocean: var(--ocean);
+  --font-display: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Light, airy base — Sui "cloud" palette */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.205 0.03 250); /* deep ocean ink #030F1C */
+  --surface: oklch(0.985 0.002 250);
+  --cloud: oklch(0.972 0.003 250); /* #F7F7F8 */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.205 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.205 0.03 250);
+
+  /* Brand */
+  --sea: oklch(0.72 0.135 248); /* #4DA2FF */
+  --aqua: oklch(0.9 0.06 240); /* #C0E6FF */
+  --ocean: oklch(0.23 0.04 250); /* #011829 navy */
+
+  --primary: oklch(0.205 0.03 250); /* navy ink button */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.972 0.003 250);
+  --secondary-foreground: oklch(0.205 0.03 250);
+  --muted: oklch(0.972 0.003 250);
+  --muted-foreground: oklch(0.5 0.02 250);
+  --accent: oklch(0.72 0.135 248);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.205 0.03 250 / 10%);
+  --hairline: oklch(0.205 0.03 250 / 12%);
+  --input: oklch(0.205 0.03 250 / 16%);
+  --ring: oklch(0.72 0.135 248 / 60%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle aqua mesh at the very top, Sui-style — light and airy, no neon */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(60% 40% at 15% -5%, oklch(0.9 0.06 240 / 0.45), transparent 60%),
+      radial-gradient(50% 35% at 95% 0%, oklch(0.72 0.135 248 / 0.14), transparent 55%);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: oklch(0.72 0.135 248 / 0.25);
+    color: var(--foreground);
+  }
+}
+
+/* 1px hairline border */
+@utility hairline {
+  border: 1px solid var(--hairline);
+}
+
+/* Mono uppercase label, Sui category style */
+@utility kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Pill button — solid navy */
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Pill button — outline */
+@utility pill-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--hairline);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+  &:hover {
+    border-color: var(--foreground);
+  }
+}
+
+/* Dark "ocean" block with light content */
+@utility ocean {
+  background: var(--ocean);
+  color: oklch(0.97 0.01 240);
+}
+
+/* Soft card surface */
+@utility card-soft {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}

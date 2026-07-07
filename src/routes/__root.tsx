@@ -73,13 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nexora — Engenharia de software sob medida" },
+      { title: "VRC Solutions — Engenharia de software sob medida" },
       {
         name: "description",
         content:
           "Desenvolvemos sistemas, aplicativos, automações e soluções de IA sob medida para acelerar o crescimento da sua empresa.",
       },
-      { property: "og:title", content: "Nexora — Engenharia de software sob medida" },
+      { property: "og:title", content: "VRC Solutions — Engenharia de software sob medida" },
       {
         property: "og:description",
         content: "Sistemas, mobile, automações e IA para transformar desafios em resultado.",

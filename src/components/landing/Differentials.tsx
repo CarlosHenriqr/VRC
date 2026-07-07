@@ -20,7 +20,7 @@ export function Differentials() {
     <section id="manifesto" className="ocean relative overflow-hidden py-24 lg:py-32">
       <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sea/20 blur-3xl" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <p className="kicker text-aqua">Por que a Nexora</p>
+        <p className="kicker text-aqua">Por que a VRC Solutions</p>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

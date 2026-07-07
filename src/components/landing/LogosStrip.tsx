@@ -4,7 +4,7 @@ export function LogosStrip() {
   return (
     <section className="relative border-y border-hairline bg-cloud py-10">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="kicker text-center">Empresas que constroem com a Nexora</p>
+        <p className="kicker text-center">Empresas que constroem com a VRC Solutions</p>
         <div className="mt-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
           {companies.map((c) => (
             <span

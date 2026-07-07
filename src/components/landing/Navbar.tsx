@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 
@@ -10,11 +10,26 @@ const links = [
   { href: "#contato", label: "Contato" },
 ];
 
+function scrollToHash(e: MouseEvent<HTMLAnchorElement>, href: string, onDone?: () => void) {
+  e.preventDefault();
+  const id = href.replace(/^#/, "");
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", href);
+  }
+  onDone?.();
+}
+
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <a href="#inicio" className={`group flex items-center gap-2 ${className}`}>
+    <a
+      href="#inicio"
+      onClick={(e) => scrollToHash(e, "#inicio")}
+      className={`group flex items-center gap-2 ${className}`}
+    >
       <span className="font-display text-2xl font-bold tracking-[-0.04em] text-foreground">
-        Nexora
+        VRC Solutions
       </span>
       <span className="h-2 w-2 rounded-full bg-sea transition-transform duration-300 group-hover:scale-125" />
     </a>
@@ -51,6 +66,7 @@ export function Navbar() {
             <a
               key={l.href}
               href={l.href}
+              onClick={(e) => scrollToHash(e, l.href)}
               className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
@@ -60,10 +76,18 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#portfolio" className="pill-outline text-sm">
+          <a
+            href="#portfolio"
+            onClick={(e) => scrollToHash(e, "#portfolio")}
+            className="pill-outline text-sm"
+          >
             Ver portfólio
           </a>
-          <a href="#contato" className="pill text-sm">
+          <a
+            href="#contato"
+            onClick={(e) => scrollToHash(e, "#contato")}
+            className="pill text-sm"
+          >
             Fale conosco <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -85,13 +109,17 @@ export function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => scrollToHash(e, l.href, () => setOpen(false))}
                 className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground"
               >
                 {l.label}
               </a>
             ))}
-            <a href="#contato" onClick={() => setOpen(false)} className="pill mt-2 justify-center">
+            <a
+              href="#contato"
+              onClick={(e) => scrollToHash(e, "#contato", () => setOpen(false))}
+              className="pill mt-2 justify-center"
+            >
               Fale conosco <ArrowRight className="h-4 w-4" />
             </a>
           </div>

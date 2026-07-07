@@ -38,7 +38,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.1, ease }}
             className="max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
-            A Nexora projeta e constrói sistemas, plataformas e automações sob medida — com a
+            A VRC Solutions projeta e constrói sistemas, plataformas e automações sob medida — com a
             engenharia, o cuidado e a previsibilidade que uma operação séria exige.
           </motion.p>
 

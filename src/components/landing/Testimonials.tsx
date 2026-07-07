@@ -5,7 +5,7 @@ const items = [
   {
     name: "Mariana Alves",
     company: "Diretora de Operações, Helix Log",
-    text: "A Nexora entregou em 3 meses o que outras agências prometiam em um ano. Comunicação impecável.",
+    text: "A VRC Solutions entregou em 3 meses o que outras agências prometiam em um ano. Comunicação impecável.",
     initials: "MA",
   },
   {

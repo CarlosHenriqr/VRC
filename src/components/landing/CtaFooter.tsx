@@ -53,7 +53,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-bold tracking-[-0.04em]">Nexora</span>
+              <span className="font-display text-2xl font-bold tracking-[-0.04em]">VRC Solutions</span>
               <span className="h-2 w-2 rounded-full bg-sea" />
             </div>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -120,7 +120,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-hairline py-8 text-xs text-muted-foreground sm:flex-row">
-          <div>© {new Date().getFullYear()} Nexora. Todos os direitos reservados.</div>
+          <div>© {new Date().getFullYear()} VRC Solutions. Todos os direitos reservados.</div>
           <div className="font-mono tracking-wide">Engenharia de software sob medida</div>
         </div>
       </div>
@@ -129,7 +129,7 @@ export function Footer() {
       <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden">
         <div className="mx-auto max-w-7xl px-6">
           <div className="font-display text-[22vw] font-bold leading-[0.8] tracking-[-0.06em] text-foreground/[0.04]">
-            Nexora
+            VRC Solutions
           </div>
         </div>
       </div>

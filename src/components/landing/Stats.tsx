@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: 50, suffix: "+", label: "Projetos entregues" },
-  { value: 100, suffix: "K+", label: "Linhas de código" },
-  { value: 99.9, suffix: "%", label: "Disponibilidade", decimals: 1 },
-  { value: 100, suffix: "%", label: "Soluções personalizadas" },
+  { value: 5, suffix: "+", label: "Especialidades técnicas" },
+  { value: 100, suffix: "%", label: "Soluções sob medida" },
+  { value: 1, suffix: "", label: "Parceiro dedicado por projeto" },
+  { value: 0, suffix: "", label: "Templates prontos — tudo personalizado" },
 ];
 
 function Counter({ to, decimals = 0 }: { to: number; decimals?: number }) {

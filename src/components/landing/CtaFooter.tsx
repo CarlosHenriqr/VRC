@@ -26,19 +26,19 @@ export function Cta() {
               transformar sua ideia em resultado.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href="mailto:contato@nexora.com.br"
+              <Link
+                to="/contato"
                 className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-foreground transition-opacity hover:opacity-90"
               >
                 Solicitar orçamento
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#portfolio"
+              </Link>
+              <Link
+                to="/cases"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white"
               >
-                Ver portfólio
-              </a>
+                Ver cases
+              </Link>
             </div>
           </div>
         </motion.div>
@@ -65,10 +65,10 @@ export function Footer() {
           <FooterCol
             title="Empresa"
             links={[
-              { label: "Sobre", href: "#sobre" },
+              { label: "Sobre", href: "/sobre", external: false },
               { label: "Serviços", href: "#servicos" },
-              { label: "Portfólio", href: "#portfolio" },
               { label: "Cases", href: "/cases", external: false },
+              { label: "Contato", href: "/contato", external: false },
             ]}
           />
 
@@ -76,7 +76,13 @@ export function Footer() {
             <h4 className="kicker">Contato</h4>
             <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-sea" strokeWidth={1.75} /> contato@nexora.com.br
+                <Mail className="h-4 w-4 text-sea" strokeWidth={1.75} />
+                <a
+                  href="mailto:contato@vrcsolutions.com.br"
+                  className="transition-colors hover:text-foreground"
+                >
+                  contato@vrcsolutions.com.br
+                </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-sea" strokeWidth={1.75} /> +55 (11) 4000-0000

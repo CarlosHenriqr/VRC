@@ -12,7 +12,7 @@ const youGet = [
   "Entregas previsíveis em sprints",
   "Integrações com seus sistemas atuais",
   "Suporte e evolução contínua",
-  "Um parceiro técnico de longo prazo",
+  "Um parceiro técnico dedicado",
 ];
 
 export function Differentials() {

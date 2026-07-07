@@ -31,7 +31,7 @@ export function Process() {
         <SectionHeader
           eyebrow="Processo"
           title="Como começamos a trabalhar juntos."
-          subtitle="Um método claro, previsível e colaborativo — da primeira conversa ao suporte de longo prazo."
+          subtitle="Um método claro, previsível e colaborativo — da primeira conversa à evolução contínua."
         />
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

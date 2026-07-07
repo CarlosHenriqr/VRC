@@ -6,9 +6,6 @@ import { Menu, X, ArrowRight } from "lucide-react";
 const hashLinks = [
   { hash: "servicos", label: "Serviços" },
   { hash: "processo", label: "Processo" },
-  { hash: "portfolio", label: "Portfólio" },
-  { hash: "sobre", label: "Sobre" },
-  { hash: "contato", label: "Contato" },
 ];
 
 function scrollToHash(e: MouseEvent<HTMLAnchorElement>, hash: string, onDone?: () => void) {
@@ -105,29 +102,32 @@ export function Navbar() {
             </a>
           ))}
           <Link
+            to="/sobre"
+            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
+          >
+            Sobre
+            <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
+          </Link>
+          <Link
             to="/cases"
             className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
           >
             Cases
             <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
           </Link>
+          <Link
+            to="/contato"
+            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
+          >
+            Contato
+            <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={navHref("portfolio")}
-            onClick={(e) => handleHashClick(e, "portfolio")}
-            className="pill-outline text-sm"
-          >
-            Ver portfólio
-          </a>
-          <a
-            href={navHref("contato")}
-            onClick={(e) => handleHashClick(e, "contato")}
-            className="pill text-sm"
-          >
+          <Link to="/contato" className="pill text-sm">
             Fale conosco <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
         <button
@@ -154,19 +154,33 @@ export function Navbar() {
               </a>
             ))}
             <Link
+              to="/sobre"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
+            >
+              Sobre
+            </Link>
+            <Link
               to="/cases"
               onClick={() => setOpen(false)}
               className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
             >
               Cases
             </Link>
-            <a
-              href={navHref("contato")}
-              onClick={(e) => handleHashClick(e, "contato", () => setOpen(false))}
+            <Link
+              to="/contato"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
+            >
+              Contato
+            </Link>
+            <Link
+              to="/contato"
+              onClick={() => setOpen(false)}
               className="pill mt-2 justify-center"
             >
               Fale conosco <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       )}

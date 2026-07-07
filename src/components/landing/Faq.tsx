@@ -29,7 +29,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="sobre" className="relative py-24 lg:py-32">
+    <section id="faq" className="relative py-24 lg:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="kicker">FAQ</p>

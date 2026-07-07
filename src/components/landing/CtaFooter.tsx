@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Linkedin, Instagram, Github, Mail, Phone, MessageCircle } from "lucide-react";
 
 export function Cta() {
@@ -106,14 +107,17 @@ export function Footer() {
             <h4 className="kicker mt-8">Legal</h4>
             <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#" className="transition-colors hover:text-foreground">
+                <Link
+                  to="/politica-de-privacidade"
+                  className="transition-colors hover:text-foreground"
+                >
                   Política de Privacidade
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-foreground">
+                <Link to="/termos-de-uso" className="transition-colors hover:text-foreground">
                   Termos de Uso
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

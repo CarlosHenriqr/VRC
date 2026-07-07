@@ -68,6 +68,7 @@ export function Footer() {
               { label: "Sobre", href: "#sobre" },
               { label: "Serviços", href: "#servicos" },
               { label: "Portfólio", href: "#portfolio" },
+              { label: "Cases", href: "/cases", external: false },
             ]}
           />
 
@@ -141,16 +142,24 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+type FooterLink = { label: string; href: string; external?: boolean };
+
+function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
   return (
     <div>
       <h4 className="kicker">{title}</h4>
       <ul className="mt-5 space-y-2.5 text-sm text-muted-foreground">
         {links.map((l) => (
           <li key={l.label}>
-            <a href={l.href} className="transition-colors hover:text-foreground">
-              {l.label}
-            </a>
+            {l.external === false && !l.href.startsWith("#") ? (
+              <Link to={l.href as "/"} className="transition-colors hover:text-foreground">
+                {l.label}
+              </Link>
+            ) : (
+              <a href={l.href} className="transition-colors hover:text-foreground">
+                {l.label}
+              </a>
+            )}
           </li>
         ))}
       </ul>

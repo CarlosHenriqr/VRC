@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 const projects = [
   {
@@ -54,7 +55,13 @@ export function Portfolio() {
           Uma seleção de soluções desenvolvidas para empresas em diferentes segmentos.
         </p>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 flex items-center gap-3">
+          <Link to="/cases" className="pill text-sm">
+            Ver todos os cases <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
             <motion.article
               key={p.name}

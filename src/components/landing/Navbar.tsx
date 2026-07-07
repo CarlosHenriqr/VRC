@@ -1,44 +1,57 @@
 import { useEffect, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 
-const links = [
-  { href: "#servicos", label: "Serviços" },
-  { href: "#processo", label: "Processo" },
-  { href: "#portfolio", label: "Portfólio" },
-  { href: "#sobre", label: "Sobre" },
-  { href: "#contato", label: "Contato" },
+const hashLinks = [
+  { hash: "servicos", label: "Serviços" },
+  { hash: "processo", label: "Processo" },
+  { hash: "portfolio", label: "Portfólio" },
+  { hash: "sobre", label: "Sobre" },
+  { hash: "contato", label: "Contato" },
 ];
 
-function scrollToHash(e: MouseEvent<HTMLAnchorElement>, href: string, onDone?: () => void) {
+function scrollToHash(e: MouseEvent<HTMLAnchorElement>, hash: string, onDone?: () => void) {
   e.preventDefault();
-  const id = href.replace(/^#/, "");
-  const target = document.getElementById(id);
+  const target = document.getElementById(hash);
   if (target) {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", href);
+    window.history.replaceState(null, "", `#${hash}`);
   }
   onDone?.();
 }
 
 export function Wordmark({ className = "" }: { className?: string }) {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
+  function handleClick(e: MouseEvent<HTMLAnchorElement>) {
+    if (isHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.replaceState(null, "", "/");
+    }
+  }
+
   return (
-    <a
-      href="#inicio"
-      onClick={(e) => scrollToHash(e, "#inicio")}
+    <Link
+      to="/"
+      onClick={handleClick}
       className={`group flex items-center gap-2 ${className}`}
     >
       <span className="font-display text-2xl font-bold tracking-[-0.04em] text-foreground">
         VRC Solutions
       </span>
       <span className="h-2 w-2 rounded-full bg-sea transition-transform duration-300 group-hover:scale-125" />
-    </a>
+    </Link>
   );
 }
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -46,6 +59,24 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  function navHref(hash: string) {
+    return isHome ? `#${hash}` : `/#${hash}`;
+  }
+
+  function handleHashClick(
+    e: MouseEvent<HTMLAnchorElement>,
+    hash: string,
+    onDone?: () => void,
+  ) {
+    if (isHome) scrollToHash(e, hash, onDone);
+    else onDone?.();
+  }
 
   return (
     <motion.header
@@ -61,31 +92,38 @@ export function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Wordmark />
 
-        <nav className="hidden items-center gap-9 lg:flex">
-          {links.map((l) => (
+        <nav className="hidden items-center gap-8 lg:flex">
+          {hashLinks.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => scrollToHash(e, l.href)}
+              key={l.hash}
+              href={navHref(l.hash)}
+              onClick={(e) => handleHashClick(e, l.hash)}
               className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
               <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
+          <Link
+            to="/cases"
+            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
+          >
+            Cases
+            <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="#portfolio"
-            onClick={(e) => scrollToHash(e, "#portfolio")}
+            href={navHref("portfolio")}
+            onClick={(e) => handleHashClick(e, "portfolio")}
             className="pill-outline text-sm"
           >
             Ver portfólio
           </a>
           <a
-            href="#contato"
-            onClick={(e) => scrollToHash(e, "#contato")}
+            href={navHref("contato")}
+            onClick={(e) => handleHashClick(e, "contato")}
             className="pill text-sm"
           >
             Fale conosco <ArrowRight className="h-4 w-4" />
@@ -105,19 +143,26 @@ export function Navbar() {
       {open && (
         <div className="border-t border-hairline bg-background/95 backdrop-blur-md lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
-            {links.map((l) => (
+            {hashLinks.map((l) => (
               <a
-                key={l.href}
-                href={l.href}
-                onClick={(e) => scrollToHash(e, l.href, () => setOpen(false))}
+                key={l.hash}
+                href={navHref(l.hash)}
+                onClick={(e) => handleHashClick(e, l.hash, () => setOpen(false))}
                 className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground"
               >
                 {l.label}
               </a>
             ))}
+            <Link
+              to="/cases"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
+            >
+              Cases
+            </Link>
             <a
-              href="#contato"
-              onClick={(e) => scrollToHash(e, "#contato", () => setOpen(false))}
+              href={navHref("contato")}
+              onClick={(e) => handleHashClick(e, "contato", () => setOpen(false))}
               className="pill mt-2 justify-center"
             >
               Fale conosco <ArrowRight className="h-4 w-4" />

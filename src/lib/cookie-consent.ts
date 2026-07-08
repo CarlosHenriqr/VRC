@@ -16,3 +16,9 @@ export function setCookieConsent(value: CookieConsent) {
 export function hasAnalyticsConsent(): boolean {
   return getCookieConsent() === "accepted";
 }
+
+export async function applyAnalyticsConsent() {
+  if (!hasAnalyticsConsent()) return;
+  const { initFirebaseAnalytics } = await import("./firebase");
+  await initFirebaseAnalytics();
+}

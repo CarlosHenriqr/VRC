@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
+import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -25,22 +26,79 @@ const stats = [
 
 const team = [
   {
-    name: "Carlos Henrique",
+    name: "Victor Bastos",
+    role: "Co-Founder & Automação",
+    photo: "/team/victor-bastos.png",
+    photoClass: "scale-[1.35] object-[center_30%]",
+    paragraphs: [
+      <>
+        Profissional com <strong className="font-medium text-foreground">cinco anos de experiência</strong>{" "}
+        em automação de testes, APIs e entrega contínua em ambientes ágeis.
+      </>,
+      <>
+        Especialista em <strong className="font-medium text-foreground">Cypress.js</strong> — atuou em
+        projetos críticos como o sistema de consórcios do Bradesco (contemplação, imóveis e veículos),
+        desenvolvendo suítes E2E com foco em estabilidade e cobertura ponta a ponta.
+      </>,
+      <>
+        Domina automação E2E e de API, testes mobile e de performance, CI/CD com Jenkins, validação de
+        dados em SQL e aplica <strong className="font-medium text-foreground">IA ao processo de QA</strong>{" "}
+        para elevar produtividade e qualidade.
+      </>,
+    ],
+  },
+  {
+    name: "Rubens Duarte",
+    role: "Co-Founder & CFO",
+    photo: "/team/rubens-duarte.png",
+    photoClass: "object-[center_18%]",
+    paragraphs: [
+      <>
+        Mais de <strong className="font-medium text-foreground">uma década em tecnologia</strong>, com foco
+        em transformar dados em decisões estratégicas de negócio.
+      </>,
+      <>
+        Atua na interseção entre <strong className="font-medium text-foreground">engenharia de dados</strong>{" "}
+        e <strong className="font-medium text-foreground">business intelligence</strong> — lidera pipelines
+        com PySpark, dbt e Airflow e entrega painéis no Power BI que gestores usam para decidir, não apenas
+        acompanhar números.
+      </>,
+      <>
+        Cobre o ciclo completo: da ingestão e modelagem em Oracle/SQL Server até dashboards publicados com{" "}
+        <strong className="font-medium text-foreground">DAX avançado</strong> e lógica de negócio integrada.
+      </>,
+    ],
+  },
+  {
+    name: "Carlos Henrique Ramos",
     role: "Co-Founder & CEO",
-    bio: "Empreendedor e estrategista de produtos digitais. Especialista em MVPs e transformação digital, conduz a visão e os próximos passos da VRC Solutions com foco em impacto e execução.",
-    initials: "CH",
-  },
-  {
-    name: "Rafael Mendes",
-    role: "Co-Founder & CTO",
-    bio: "Engenheiro de software com sólida experiência em arquitetura de sistemas escaláveis. Lidera os times de desenvolvimento com foco em qualidade técnica, usabilidade e entregas previsíveis.",
-    initials: "RM",
-  },
-  {
-    name: "Ana Beatriz Costa",
-    role: "Co-Founder & COO",
-    bio: "Gestora de operações com repertório em projetos corporativos de diferentes segmentos. Garante clareza nos processos, proximidade com clientes e relações de confiança desde o primeiro contato.",
-    initials: "AC",
+    photo: "/team/carlos-henrique-ramos.png",
+    photoClass: "object-[center_22%]",
+    paragraphs: [
+      <>
+        Desenvolvedor Back-End e estudante de Análise e Desenvolvimento de Sistemas, com foco na criação de{" "}
+        <strong className="font-medium text-foreground">soluções modernas, escaláveis e bem estruturadas</strong>.
+        Apaixonado por tecnologia e aprendizado contínuo, busca transformar desafios em aplicações eficientes,
+        priorizando qualidade, desempenho e boas práticas de desenvolvimento.
+      </>,
+      <>
+        Com experiência no desenvolvimento de <strong className="font-medium text-foreground">APIs</strong>,{" "}
+        <strong className="font-medium text-foreground">bancos de dados</strong> e integração de sistemas, atua
+        principalmente com <strong className="font-medium text-foreground">Node.js</strong>,{" "}
+        <strong className="font-medium text-foreground">TypeScript</strong>,{" "}
+        <strong className="font-medium text-foreground">PostgreSQL</strong> e{" "}
+        <strong className="font-medium text-foreground">Docker</strong>. Destaca-se pela facilidade em aprender
+        novas tecnologias, pela organização na construção de projetos e pela dedicação em entregar soluções que
+        gerem valor para usuários e empresas.
+      </>,
+      <>
+        Movido pela curiosidade e pela evolução constante, acredita no{" "}
+        <strong className="font-medium text-foreground">trabalho em equipe</strong>, na comunicação clara e na
+        colaboração como pilares para o sucesso de qualquer projeto. Está sempre em busca de novos desafios que
+        permitam expandir seus conhecimentos e contribuir com soluções inovadoras, mantendo o compromisso com a
+        excelência técnica e o desenvolvimento profissional.
+      </>,
+    ],
   },
 ];
 
@@ -135,6 +193,79 @@ function FadeIn({
     >
       {children}
     </motion.div>
+  );
+}
+
+type TeamMember = (typeof team)[number];
+
+function TeamPhoto({
+  member,
+  align,
+}: {
+  member: TeamMember;
+  align: "left" | "right";
+}) {
+  return (
+    <div
+      className={cn(
+        "relative mx-auto flex h-80 w-full max-w-md items-center justify-center sm:h-96",
+        align === "left" ? "lg:justify-start" : "lg:ml-auto lg:justify-end",
+      )}
+    >
+      <div
+        className={cn(
+          "absolute top-1/2 h-36 w-[4.5rem] -translate-y-1/2 rounded-l-full bg-cloud",
+          align === "left" ? "-left-1 sm:left-0" : "-right-1 rotate-180 sm:right-0",
+        )}
+        aria-hidden
+      />
+      <div
+        className={cn(
+          "absolute top-1/2 h-28 w-14 -translate-y-1/2 rounded-l-full bg-muted/80",
+          align === "left" ? "left-10 sm:left-12" : "right-10 rotate-180 sm:right-12",
+        )}
+        aria-hidden
+      />
+
+      <div className="relative z-10 rounded-full bg-sea p-2.5 shadow-[0_24px_48px_-12px_oklch(0.72_0.135_248/0.35)] sm:p-3">
+        <div className="h-60 w-60 overflow-hidden rounded-full border-4 border-white bg-white sm:h-72 sm:w-72">
+          <img
+            src={member.photo}
+            alt={member.name}
+            className={cn("h-full w-full object-cover", member.photoClass)}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TeamMemberRow({ member, index }: { member: TeamMember; index: number }) {
+  const reverse = index % 2 === 1;
+
+  return (
+    <FadeIn delay={index * 0.06}>
+      <article className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className={cn("max-w-xl", reverse && "lg:col-start-2")}>
+          <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            {member.role}
+          </p>
+          <h3 className="mt-3 font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
+            {member.name}
+          </h3>
+          <div className="mt-6 space-y-5 text-[1.05rem] leading-relaxed text-muted-foreground">
+            {member.paragraphs.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+
+        <div className={cn(reverse && "lg:col-start-1 lg:row-start-1")}>
+          <TeamPhoto member={member} align={reverse ? "left" : "right"} />
+        </div>
+      </article>
+    </FadeIn>
   );
 }
 
@@ -283,33 +414,17 @@ function SobrePage() {
       </section>
 
       {/* Time */}
-      <section className="border-t border-hairline bg-cloud py-24 lg:py-32">
+      <section className="border-t border-hairline bg-background py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <FadeIn>
-            <p className="kicker">Quem faz a VRC Solutions</p>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-[-0.04em] sm:text-4xl lg:text-5xl">
-              Liderança com experiência
+          <FadeIn className="text-center">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.04em] sm:text-4xl lg:text-5xl">
+              Quem faz a VRC Solutions
             </h2>
           </FadeIn>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          <div className="mt-20 flex flex-col gap-24 lg:mt-24 lg:gap-32">
             {team.map((member, i) => (
-              <FadeIn key={member.name} delay={i * 0.08}>
-                <article className="card-soft flex h-full flex-col p-8">
-                  <div className="grid h-16 w-16 place-items-center rounded-2xl bg-sea/10 font-display text-xl font-bold text-sea">
-                    {member.initials}
-                  </div>
-                  <p className="mt-6 text-xs font-medium uppercase tracking-wider text-sea">
-                    {member.role}
-                  </p>
-                  <h3 className="mt-2 font-display text-xl font-semibold tracking-tight">
-                    {member.name}
-                  </h3>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {member.bio}
-                  </p>
-                </article>
-              </FadeIn>
+              <TeamMemberRow key={member.name} member={member} index={i} />
             ))}
           </div>
         </div>

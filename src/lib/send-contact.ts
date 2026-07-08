@@ -1,32 +1,101 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { getContactEnv } from "./contact-env";
+import { CONTACT_SERVICES, CONTACT_SOURCES } from "./contact-constants";
+import {
+  assertSafeText,
+  escapeHtml,
+  normalizeEmail,
+  sanitizeHeaderValue,
+} from "./contact-security";
+import {
+  assertEmailRateLimit,
+  contactRateLimitMiddleware,
+} from "./contact-rate-limit";
 
 export const contactSchema = z.object({
-  services: z.array(z.string()).min(1, "Selecione ao menos um serviço"),
-  name: z.string().min(3, "Nome deve ter ao menos 3 caracteres"),
-  email: z.string().email("E-mail inválido"),
-  phone: z.string().min(8, "Telefone inválido"),
-  source: z.string().min(1, "Informe como nos encontrou"),
-  message: z.string().min(20, "Mensagem deve ter ao menos 20 caracteres"),
+  services: z
+    .array(z.enum(CONTACT_SERVICES))
+    .min(1, "Selecione ao menos um serviço")
+    .max(CONTACT_SERVICES.length),
+  name: z
+    .string()
+    .trim()
+    .min(3, "Nome deve ter ao menos 3 caracteres")
+    .max(120, "Nome muito longo")
+    .regex(/^[\p{L}\p{M}\s'.-]+$/u, "Nome contém caracteres inválidos"),
+  email: z
+    .string()
+    .trim()
+    .email("E-mail inválido")
+    .max(254, "E-mail muito longo"),
+  phone: z
+    .string()
+    .trim()
+    .min(8, "Telefone inválido")
+    .max(30, "Telefone muito longo")
+    .regex(/^[\d\s()+.-]+$/, "Telefone contém caracteres inválidos"),
+  source: z.enum(CONTACT_SOURCES, {
+    required_error: "Informe como nos encontrou",
+    invalid_type_error: "Informe como nos encontrou",
+  }),
+  message: z
+    .string()
+    .trim()
+    .min(20, "Mensagem deve ter ao menos 20 caracteres")
+    .max(5000, "Mensagem muito longa"),
+  website: z.string().optional().default(""),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
 
+function validatePayload(data: ContactInput) {
+  if (data.website?.trim()) {
+    throw new Error("Não foi possível enviar a mensagem. Tente novamente.");
+  }
+
+  assertSafeText(data.name);
+  assertSafeText(data.email);
+  assertSafeText(data.phone);
+  assertSafeText(data.source);
+  assertSafeText(data.message);
+  for (const service of data.services) {
+    assertSafeText(service);
+  }
+}
+
 export const sendContact = createServerFn({ method: "POST" })
+  .middleware([contactRateLimitMiddleware])
   .validator(contactSchema)
   .handler(async ({ data }) => {
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_EMAIL;
+    validatePayload(data);
+
+    const email = normalizeEmail(data.email);
+    assertEmailRateLimit(email);
+
+    const { apiKey, to, from } = getContactEnv();
 
     if (!apiKey || !to) {
       console.error("Resend: RESEND_API_KEY ou CONTACT_EMAIL não configurados");
-      throw new Error("Configuração de e-mail ausente. Configure .env e tente novamente.");
+      throw new Error(
+        "Configuração de e-mail ausente. Adicione RESEND_API_KEY e CONTACT_EMAIL no arquivo .env.",
+      );
     }
 
     const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
 
-    const servicesText = data.services.join(", ");
+    const safe = {
+      name: escapeHtml(data.name),
+      email: escapeHtml(email),
+      phone: escapeHtml(data.phone),
+      source: escapeHtml(data.source),
+      message: escapeHtml(data.message),
+      servicesText: escapeHtml(data.services.join(", ")),
+    };
+
+    const subjectName = sanitizeHeaderValue(data.name);
+    const subjectServices = sanitizeHeaderValue(data.services.join(", "), 300);
 
     const html = `
 <!DOCTYPE html>
@@ -48,7 +117,7 @@ export const sendContact = createServerFn({ method: "POST" })
               <tr>
                 <td style="padding-bottom:20px;border-bottom:1px solid #e5e7eb">
                   <p style="margin:0 0 4px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">Serviços de interesse</p>
-                  <p style="margin:0;font-size:15px;font-weight:600">${servicesText}</p>
+                  <p style="margin:0;font-size:15px;font-weight:600">${safe.servicesText}</p>
                 </td>
               </tr>
               <tr>
@@ -57,21 +126,21 @@ export const sendContact = createServerFn({ method: "POST" })
                     <tr>
                       <td width="50%" style="padding-right:16px">
                         <p style="margin:0 0 4px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">Nome</p>
-                        <p style="margin:0;font-size:15px">${data.name}</p>
+                        <p style="margin:0;font-size:15px">${safe.name}</p>
                       </td>
                       <td width="50%">
                         <p style="margin:0 0 4px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">E-mail</p>
-                        <p style="margin:0;font-size:15px"><a href="mailto:${data.email}" style="color:#4DA2FF">${data.email}</a></p>
+                        <p style="margin:0;font-size:15px">${safe.email}</p>
                       </td>
                     </tr>
                     <tr>
                       <td width="50%" style="padding-top:16px;padding-right:16px">
                         <p style="margin:0 0 4px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">Telefone</p>
-                        <p style="margin:0;font-size:15px">${data.phone}</p>
+                        <p style="margin:0;font-size:15px">${safe.phone}</p>
                       </td>
                       <td width="50%" style="padding-top:16px">
                         <p style="margin:0 0 4px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">Como nos encontrou</p>
-                        <p style="margin:0;font-size:15px">${data.source}</p>
+                        <p style="margin:0;font-size:15px">${safe.source}</p>
                       </td>
                     </tr>
                   </table>
@@ -80,7 +149,7 @@ export const sendContact = createServerFn({ method: "POST" })
               <tr>
                 <td style="padding-top:20px">
                   <p style="margin:0 0 8px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280">Mensagem</p>
-                  <p style="margin:0;font-size:15px;line-height:1.6;white-space:pre-wrap">${data.message}</p>
+                  <p style="margin:0;font-size:15px;line-height:1.6;white-space:pre-wrap">${safe.message}</p>
                 </td>
               </tr>
             </table>
@@ -97,18 +166,33 @@ export const sendContact = createServerFn({ method: "POST" })
 </body>
 </html>`;
 
-    const { error } = await resend.emails.send({
-      from: process.env.FROM_EMAIL ?? "VRC Solutions <onboarding@resend.dev>",
+    const { data: result, error } = await resend.emails.send({
+      from,
       to,
-      replyTo: data.email,
-      subject: `Novo contato: ${data.name} — ${servicesText}`,
+      replyTo: email,
+      subject: `Novo contato: ${subjectName} — ${subjectServices}`,
       html,
     });
 
     if (error) {
       console.error("Resend error:", error);
-      throw new Error("Não foi possível enviar a mensagem. Tente novamente.");
+      const detail =
+        typeof error === "object" && error && "message" in error
+          ? String(error.message)
+          : "Erro desconhecido ao enviar e-mail.";
+
+      if (detail.toLowerCase().includes("only send testing emails")) {
+        throw new Error(
+          "Conta Resend em modo teste: use o mesmo e-mail da sua conta Resend em CONTACT_EMAIL ou verifique um domínio no Resend.",
+        );
+      }
+
+      throw new Error(`Não foi possível enviar a mensagem: ${detail}`);
     }
 
-    return { ok: true };
+    if (!result?.id) {
+      throw new Error("Não foi possível confirmar o envio. Tente novamente.");
+    }
+
+    return { ok: true, id: result.id };
   });

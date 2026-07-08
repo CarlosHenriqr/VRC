@@ -1,36 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { Mail, Phone, MessageCircle, Linkedin, Instagram, Github, Send, Check } from "lucide-react";
+import { Mail, Phone, MessageCircle, Linkedin, Send, Check } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/CtaFooter";
+import { CONTACT_SERVICES, CONTACT_SOURCES } from "@/lib/contact-constants";
 import { sendContact, contactSchema, type ContactInput } from "@/lib/send-contact";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-
-const services = [
-  "Desenvolvimento Web",
-  "Aplicativo Mobile",
-  "Automação",
-  "Inteligência Artificial",
-  "Consultoria de Arquitetura",
-  "ERP / CRM",
-  "Integração de Sistemas",
-  "Outros",
-];
-
-const sources = [
-  "Google",
-  "LinkedIn",
-  "Instagram",
-  "Indicação",
-  "GitHub",
-  "Evento",
-  "Outros",
-];
+const CLIENT_COOLDOWN_MS = 60_000;
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -48,6 +29,8 @@ export const Route = createFileRoute("/contato")({
 
 function ContatoPage() {
   const [sent, setSent] = useState(false);
+  const [cooldownUntil, setCooldownUntil] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
 
   const {
     register,
@@ -58,19 +41,33 @@ function ContatoPage() {
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { services: [] },
+    defaultValues: { services: [], website: "" },
   });
 
   const selectedServices = watch("services");
+  const onCooldown = now < cooldownUntil;
+  const cooldownSeconds = onCooldown ? Math.ceil((cooldownUntil - now) / 1000) : 0;
+
+  useEffect(() => {
+    if (!onCooldown) return;
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [onCooldown]);
 
   async function onSubmit(data: ContactInput) {
+    if (onCooldown) {
+      toast.error(`Aguarde ${cooldownSeconds}s antes de enviar novamente.`);
+      return;
+    }
+
     try {
       await sendContact({ data });
       setSent(true);
-      reset();
+      setCooldownUntil(Date.now() + CLIENT_COOLDOWN_MS);
+      reset({ services: [], website: "" });
       toast.success("Mensagem enviada! Entraremos em contato em breve.");
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Erro ao enviar. Tente novamente.";
+      const msg = getErrorMessage(err);
       toast.error(msg);
     }
   }
@@ -145,6 +142,15 @@ function ContatoPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-8">
+                  <input
+                    {...register("website")}
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
+
                   {/* Service chips */}
                   <div>
                     <label className="kicker mb-3 block">
@@ -155,7 +161,7 @@ function ContatoPage() {
                       name="services"
                       render={({ field }) => (
                         <div className="flex flex-wrap gap-2">
-                          {services.map((s) => {
+                          {CONTACT_SERVICES.map((s) => {
                             const active = field.value.includes(s);
                             return (
                               <button
@@ -198,6 +204,8 @@ function ContatoPage() {
                       <input
                         {...register("name")}
                         type="text"
+                        maxLength={120}
+                        autoComplete="name"
                         placeholder="Seu nome completo"
                         className={inputClass(!!errors.name)}
                       />
@@ -206,6 +214,8 @@ function ContatoPage() {
                       <input
                         {...register("email")}
                         type="email"
+                        maxLength={254}
+                        autoComplete="email"
                         placeholder="seu@email.com"
                         className={inputClass(!!errors.email)}
                       />
@@ -218,6 +228,8 @@ function ContatoPage() {
                       <input
                         {...register("phone")}
                         type="tel"
+                        maxLength={30}
+                        autoComplete="tel"
                         placeholder="+55 (11) 9 0000-0000"
                         className={inputClass(!!errors.phone)}
                       />
@@ -231,7 +243,7 @@ function ContatoPage() {
                         <option value="" disabled>
                           Selecione uma opção
                         </option>
-                        {sources.map((s) => (
+                        {CONTACT_SOURCES.map((s) => (
                           <option key={s} value={s}>
                             {s}
                           </option>
@@ -245,6 +257,7 @@ function ContatoPage() {
                     <textarea
                       {...register("message")}
                       rows={5}
+                      maxLength={5000}
                       placeholder="Conte seu desafio, ideia ou projeto..."
                       className={inputClass(!!errors.message) + " resize-none"}
                     />
@@ -252,14 +265,16 @@ function ContatoPage() {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="pill w-full justify-center sm:w-auto"
+                    disabled={isSubmitting || onCooldown}
+                    className="pill w-full justify-center sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isSubmitting ? (
                       <>
                         <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                         Enviando…
                       </>
+                    ) : onCooldown ? (
+                      <>Aguarde {cooldownSeconds}s</>
                     ) : (
                       <>
                         Enviar mensagem
@@ -313,8 +328,7 @@ function ContatoPage() {
                 <div className="flex gap-2.5">
                   {[
                     { icon: Linkedin, label: "LinkedIn", href: "#" },
-                    { icon: Instagram, label: "Instagram", href: "#" },
-                    { icon: Github, label: "GitHub", href: "#" },
+
                   ].map((s) => (
                     <a
                       key={s.label}
@@ -344,6 +358,14 @@ function ContatoPage() {
       <Footer />
     </div>
   );
+}
+
+function getErrorMessage(err: unknown) {
+  if (err instanceof Error && err.message) return err.message;
+  if (typeof err === "object" && err && "message" in err) {
+    return String(err.message);
+  }
+  return "Erro ao enviar. Tente novamente.";
 }
 
 function Field({

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   getCookieConsent,
   setCookieConsent,
+  applyAnalyticsConsent,
   type CookieConsent,
 } from "@/lib/cookie-consent";
 
@@ -11,12 +12,19 @@ export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(getCookieConsent() === null);
+    const consent = getCookieConsent();
+    setVisible(consent === null);
+    if (consent === "accepted") {
+      void applyAnalyticsConsent();
+    }
   }, []);
 
   function respond(choice: CookieConsent) {
     setCookieConsent(choice);
     setVisible(false);
+    if (choice === "accepted") {
+      void applyAnalyticsConsent();
+    }
   }
 
   return (

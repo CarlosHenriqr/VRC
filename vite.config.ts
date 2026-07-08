@@ -14,5 +14,6 @@ export default defineConfig({
   },
   nitro: {
     preset: "node-server",
+    envPrefix: ["RESEND_", "CONTACT_", "FROM_"],
   },
 });

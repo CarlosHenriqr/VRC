@@ -98,8 +98,6 @@ export function Footer() {
             <div className="mt-5 flex gap-2.5">
               {[
                 { icon: Linkedin, label: "LinkedIn" },
-                { icon: Instagram, label: "Instagram" },
-                { icon: Github, label: "GitHub" },
               ].map((s) => (
                 <a
                   key={s.label}

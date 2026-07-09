@@ -26,6 +26,27 @@ const stats = [
 
 const team = [
   {
+    name: "Carlos Henrique Ramos",
+    role: "Co-Founder & CEO",
+    photo: "/team/carlos-henrique-ramos.png",
+    photoClass: "object-[center_22%]",
+    paragraphs: [
+      <>
+        Desenvolvedor Back-End e estudante de Análise e Desenvolvimento de Sistemas, com foco na criação de{" "}
+        <strong className="font-medium text-foreground">soluções modernas, escaláveis e bem estruturadas</strong>.
+        Apaixonado por tecnologia e aprendizado contínuo, busca transformar desafios em aplicações eficientes,
+        priorizando qualidade, desempenho e boas práticas de desenvolvimento.
+      </>,
+      <>
+        Movido pela curiosidade e pela evolução constante, acredita no{" "}
+        <strong className="font-medium text-foreground">trabalho em equipe</strong>, na comunicação clara e na
+        colaboração como pilares para o sucesso de qualquer projeto. Está sempre em busca de novos desafios que
+        permitam expandir seus conhecimentos e contribuir com soluções inovadoras, mantendo o compromisso com a
+        excelência técnica e o desenvolvimento profissional.
+      </>,
+    ],
+  },
+  {
     name: "Victor Bastos",
     role: "Co-Founder & Automação",
     photo: "/team/victor-bastos.png",
@@ -66,37 +87,6 @@ const team = [
       <>
         Cobre o ciclo completo: da ingestão e modelagem em Oracle/SQL Server até dashboards publicados com{" "}
         <strong className="font-medium text-foreground">DAX avançado</strong> e lógica de negócio integrada.
-      </>,
-    ],
-  },
-  {
-    name: "Carlos Henrique Ramos",
-    role: "Co-Founder & CEO",
-    photo: "/team/carlos-henrique-ramos.png",
-    photoClass: "object-[center_22%]",
-    paragraphs: [
-      <>
-        Desenvolvedor Back-End e estudante de Análise e Desenvolvimento de Sistemas, com foco na criação de{" "}
-        <strong className="font-medium text-foreground">soluções modernas, escaláveis e bem estruturadas</strong>.
-        Apaixonado por tecnologia e aprendizado contínuo, busca transformar desafios em aplicações eficientes,
-        priorizando qualidade, desempenho e boas práticas de desenvolvimento.
-      </>,
-      <>
-        Com experiência no desenvolvimento de <strong className="font-medium text-foreground">APIs</strong>,{" "}
-        <strong className="font-medium text-foreground">bancos de dados</strong> e integração de sistemas, atua
-        principalmente com <strong className="font-medium text-foreground">Node.js</strong>,{" "}
-        <strong className="font-medium text-foreground">TypeScript</strong>,{" "}
-        <strong className="font-medium text-foreground">PostgreSQL</strong> e{" "}
-        <strong className="font-medium text-foreground">Docker</strong>. Destaca-se pela facilidade em aprender
-        novas tecnologias, pela organização na construção de projetos e pela dedicação em entregar soluções que
-        gerem valor para usuários e empresas.
-      </>,
-      <>
-        Movido pela curiosidade e pela evolução constante, acredita no{" "}
-        <strong className="font-medium text-foreground">trabalho em equipe</strong>, na comunicação clara e na
-        colaboração como pilares para o sucesso de qualquer projeto. Está sempre em busca de novos desafios que
-        permitam expandir seus conhecimentos e contribuir com soluções inovadoras, mantendo o compromisso com a
-        excelência técnica e o desenvolvimento profissional.
       </>,
     ],
   },

@@ -1,45 +1,26 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { CASES } from "@/lib/cases";
 
-const projects = [
-  {
-    name: "Helix CRM",
-    sector: "SaaS B2B",
-    desc: "Plataforma de relacionamento com automações de pipeline e IA preditiva.",
-    tech: ["React", "Node.js", "PostgreSQL"],
-  },
-  {
-    name: "Cargo Flow",
-    sector: "Logística",
-    desc: "Sistema de rastreamento logístico em tempo real para frota nacional.",
-    tech: ["Next.js", "WebSockets", "Redis"],
-  },
-  {
-    name: "Atlas Mobile",
-    sector: "Fintech",
-    desc: "App de gestão financeira pessoal com integração Open Finance.",
-    tech: ["React Native", "Kotlin", "Swift"],
-  },
-  {
-    name: "Vertex AI Assist",
-    sector: "Inteligência Artificial",
-    desc: "Assistente inteligente integrado a ERPs para suporte ao time interno.",
-    tech: ["Python", "LLM", "Vector DB"],
-  },
-  {
-    name: "Nimbus ERP",
-    sector: "Indústria",
-    desc: "ERP modular para indústrias de médio porte com BI integrado.",
-    tech: ["TypeScript", "NestJS", "ClickHouse"],
-  },
-  {
-    name: "Loop Automations",
-    sector: "Automação",
-    desc: "Hub de automações conectando 30+ APIs corporativas.",
-    tech: ["Go", "RabbitMQ", "Kubernetes"],
-  },
-];
+const FEATURED_SLUGS = [
+  "helix-crm",
+  "cargo-flow",
+  "atlas-mobile",
+  "vertex-ai-assist",
+  "nimbus-erp",
+  "loop-automations",
+] as const;
+
+const projects = FEATURED_SLUGS.map((slug) => {
+  const c = CASES.find((item) => item.slug === slug)!;
+  return {
+    name: c.title,
+    sector: c.sector,
+    desc: c.desc,
+    tech: c.tech,
+  };
+});
 
 export function Portfolio() {
   return (

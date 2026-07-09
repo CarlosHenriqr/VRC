@@ -66,7 +66,7 @@ export function Footer() {
             title="Empresa"
             links={[
               { label: "Sobre", href: "/sobre", external: false },
-              { label: "Serviços", href: "#servicos" },
+              { label: "Serviços", href: "/servicos/desenvolvimento-web", external: false },
               { label: "Cases", href: "/cases", external: false },
               { label: "Contato", href: "/contato", external: false },
             ]}

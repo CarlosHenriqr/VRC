@@ -1,128 +1,15 @@
 import { useState, useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Search, X, ArrowUpRight, RotateCcw } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
-
-type Case = {
-  slug: string;
-  title: string;
-  client: string;
-  sector: string;
-  solution: string;
-  desc: string;
-  tech: string[];
-  highlight?: string;
-};
-
-const cases: Case[] = [
-  {
-    slug: "helix-crm",
-    title: "Helix CRM",
-    client: "Helix Log",
-    sector: "SaaS B2B",
-    solution: "Desenvolvimento Web",
-    desc: "Plataforma de relacionamento com automações de pipeline, scoring de leads e IA preditiva para equipes de vendas.",
-    tech: ["React", "Node.js", "PostgreSQL"],
-    highlight: "3× aumento na conversão de leads",
-  },
-  {
-    slug: "cargo-flow",
-    title: "Cargo Flow",
-    client: "Atlas Transportes",
-    sector: "Logística",
-    solution: "Desenvolvimento Web",
-    desc: "Sistema de rastreamento logístico em tempo real com painel de controle de frota nacional e alertas automáticos.",
-    tech: ["Next.js", "WebSockets", "Redis"],
-    highlight: "40% redução no tempo de rastreamento",
-  },
-  {
-    slug: "atlas-mobile",
-    title: "Atlas Mobile",
-    client: "Atlas Finance",
-    sector: "Fintech",
-    solution: "Mobile",
-    desc: "App de gestão financeira pessoal com integração Open Finance, categorização automática e metas de investimento.",
-    tech: ["React Native", "Kotlin", "Swift"],
-    highlight: "120 mil downloads no primeiro mês",
-  },
-  {
-    slug: "vertex-ai-assist",
-    title: "Vertex AI Assist",
-    client: "Nimbus Industrial",
-    sector: "Indústria",
-    solution: "Inteligência Artificial",
-    desc: "Assistente inteligente integrado a ERPs legados para suporte ao time interno, com respostas contextuais e auditoria.",
-    tech: ["Python", "LLM", "Vector DB"],
-    highlight: "65% menos tickets no suporte interno",
-  },
-  {
-    slug: "nimbus-erp",
-    title: "Nimbus ERP",
-    client: "Nimbus Industrial",
-    sector: "Indústria",
-    solution: "Desenvolvimento Web",
-    desc: "ERP modular para indústrias de médio porte com BI integrado, gestão de estoque e dashboards em tempo real.",
-    tech: ["TypeScript", "NestJS", "ClickHouse"],
-    highlight: "Substituiu 4 sistemas legados",
-  },
-  {
-    slug: "loop-automations",
-    title: "Loop Automations",
-    client: "Loop Studio",
-    sector: "Automação",
-    solution: "Automação",
-    desc: "Hub de automações conectando 30+ APIs corporativas, com orquestração de fluxos e monitoramento centralizado.",
-    tech: ["Go", "RabbitMQ", "Kubernetes"],
-    highlight: "1.200 horas/mês economizadas",
-  },
-  {
-    slug: "medsync",
-    title: "MedSync",
-    client: "ClínicaPlus",
-    sector: "Saúde",
-    solution: "Mobile",
-    desc: "App de agendamento e prontuário eletrônico para clínicas de médio porte, com integração a planos de saúde.",
-    tech: ["React Native", "FastAPI", "PostgreSQL"],
-    highlight: "90% de redução no no-show",
-  },
-  {
-    slug: "edupath",
-    title: "EduPath",
-    client: "Instituto Saber",
-    sector: "Educação",
-    solution: "Desenvolvimento Web",
-    desc: "Plataforma LMS com trilhas de aprendizado personalizadas por IA, certificações digitais e relatórios de progresso.",
-    tech: ["Next.js", "Python", "MongoDB"],
-    highlight: "2× aumento na taxa de conclusão",
-  },
-  {
-    slug: "tradebot",
-    title: "TradeBot",
-    client: "Atlas Finance",
-    sector: "Fintech",
-    solution: "Inteligência Artificial",
-    desc: "Motor de análise quantitativa com modelos de ML para identificação de oportunidades em renda variável.",
-    tech: ["Python", "PyTorch", "TimescaleDB"],
-    highlight: "Backtests com 78% de precisão",
-  },
-  {
-    slug: "retailflow",
-    title: "RetailFlow",
-    client: "Grupo MaxVarejo",
-    sector: "Varejo",
-    solution: "Automação",
-    desc: "Automação de reposição de estoque e precificação dinâmica integrada ao ERP e marketplaces nacionais.",
-    tech: ["Node.js", "RabbitMQ", "Redis"],
-    highlight: "30% de redução em ruptura de estoque",
-  },
-];
+import { CASES } from "@/lib/cases";
 
 const ALL = "Todos";
 
-const sectors = [ALL, ...Array.from(new Set(cases.map((c) => c.sector))).sort()];
-const solutions = [ALL, ...Array.from(new Set(cases.map((c) => c.solution))).sort()];
+const sectors = [ALL, ...Array.from(new Set(CASES.map((c) => c.sector))).sort()];
+const solutions = [ALL, ...Array.from(new Set(CASES.map((c) => c.solution))).sort()];
 
 export const Route = createFileRoute("/cases")({
   head: () => ({
@@ -151,9 +38,9 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-200 ${
+      className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors duration-150 ${
         active
-          ? "bg-sea text-white shadow-[0_0_0_1px_theme(colors.sea)]"
+          ? "bg-sea text-white"
           : "border border-hairline text-muted-foreground hover:border-sea hover:text-foreground"
       }`}
     >
@@ -162,29 +49,36 @@ function FilterChip({
   );
 }
 
+function ActiveTag({ label, onClear }: { label: string; onClear: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClear}
+      className="inline-flex items-center gap-1.5 rounded-full bg-sea/10 px-2.5 py-1 text-xs font-medium text-sea ring-1 ring-sea/20 transition-colors hover:bg-sea/15"
+    >
+      {label}
+      <X className="h-3 w-3" strokeWidth={2} />
+    </button>
+  );
+}
+
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col items-center py-24 text-center"
-    >
+    <div className="flex flex-col items-center py-24 text-center">
       <div className="grid h-16 w-16 place-items-center rounded-full border border-hairline text-muted-foreground">
         <Search className="h-6 w-6" />
       </div>
-      <p className="mt-6 font-display text-xl font-semibold text-foreground">Nenhum case encontrado</p>
+      <p className="mt-6 font-display text-xl font-semibold text-foreground">
+        Nenhum case encontrado
+      </p>
       <p className="mt-2 text-sm text-muted-foreground">
         Tente outros termos ou limpe os filtros para ver todos os projetos.
       </p>
-      <button
-        type="button"
-        onClick={onReset}
-        className="pill-outline mt-6 text-sm"
-      >
+      <button type="button" onClick={onReset} className="pill-outline mt-6 text-sm">
         <RotateCcw className="h-4 w-4" />
         Limpar filtros
       </button>
-    </motion.div>
+    </div>
   );
 }
 
@@ -195,7 +89,7 @@ function CasesPage() {
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
-    return cases.filter((c) => {
+    return CASES.filter((c) => {
       const matchSearch =
         q === "" ||
         c.title.toLowerCase().includes(q) ||
@@ -208,6 +102,10 @@ function CasesPage() {
   }, [search, sector, solution]);
 
   const hasActiveFilter = search !== "" || sector !== ALL || solution !== ALL;
+  const resultLabel =
+    filtered.length === 1
+      ? "1 case encontrado"
+      : `${filtered.length} cases encontrados`;
 
   function resetFilters() {
     setSearch("");
@@ -219,7 +117,6 @@ function CasesPage() {
     <div className="relative z-10 min-h-screen bg-background text-foreground">
       <Navbar />
 
-      {/* ── Header ── */}
       <section className="relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-20">
         <div className="mx-auto max-w-6xl px-6">
           <motion.p
@@ -253,31 +150,52 @@ function CasesPage() {
         </div>
       </section>
 
-      {/* ── Filters ── */}
-      <div className="sticky top-[4.5rem] z-40 border-b border-hairline bg-background/95 backdrop-blur-md">
-        <div className="mx-auto max-w-6xl px-6 py-4 space-y-3">
-          {/* Search */}
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="search"
-              placeholder="Buscar por projeto, cliente ou descrição…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-full border border-hairline bg-background py-2.5 pl-11 pr-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-sea focus:outline-none focus:ring-2 focus:ring-sea/20 transition-all duration-200"
-            />
-            {search && (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            )}
+      {/* Sticky filters */}
+      <div className="sticky top-[4.5rem] z-40 border-b border-hairline bg-background/95 shadow-[0_8px_24px_-16px_rgba(2,12,27,0.18)] backdrop-blur-md">
+        <div className="mx-auto max-w-6xl space-y-3 px-6 py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="relative min-w-0 flex-1">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                placeholder="Buscar por projeto, cliente ou descrição…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full rounded-full border border-hairline bg-background py-2.5 pl-11 pr-10 text-sm text-foreground placeholder:text-muted-foreground transition-colors duration-150 focus:border-sea focus:outline-none focus:ring-2 focus:ring-sea/20"
+              />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  aria-label="Limpar busca"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+
+            <div className="flex shrink-0 items-center justify-between gap-3 sm:justify-end">
+              <p className="text-sm font-medium text-foreground">
+                <span className="tabular-nums text-sea">{filtered.length}</span>
+                <span className="text-muted-foreground">
+                  {" "}
+                  de {CASES.length} case{CASES.length !== 1 ? "s" : ""}
+                </span>
+              </p>
+              {hasActiveFilter && (
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-sea/30 bg-sea/10 px-3.5 py-2 text-xs font-medium text-sea transition-colors hover:bg-sea hover:text-white"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  Limpar
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Filter rows */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="kicker mr-1">Setor</span>
             {sectors.map((s) => (
@@ -300,93 +218,80 @@ function CasesPage() {
               />
             ))}
           </div>
+
+          {hasActiveFilter && (
+            <div className="flex flex-wrap items-center gap-2 border-t border-hairline pt-3">
+              <span className="text-xs text-muted-foreground">Ativos:</span>
+              {search && (
+                <ActiveTag
+                  label={`Busca: “${search.length > 24 ? `${search.slice(0, 24)}…` : search}”`}
+                  onClear={() => setSearch("")}
+                />
+              )}
+              {sector !== ALL && (
+                <ActiveTag label={`Setor: ${sector}`} onClear={() => setSector(ALL)} />
+              )}
+              {solution !== ALL && (
+                <ActiveTag label={`Solução: ${solution}`} onClear={() => setSolution(ALL)} />
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* ── Grid ── */}
       <section className="bg-cloud py-16 lg:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              {filtered.length} case{filtered.length !== 1 ? "s" : ""} encontrado
-              {filtered.length !== 1 ? "s" : ""}
-            </p>
-            {hasActiveFilter && (
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <RotateCcw className="h-3.5 w-3.5" />
-                Limpar filtros
-              </button>
-            )}
-          </div>
+          <p className="text-sm text-muted-foreground">{resultLabel}</p>
 
-          <AnimatePresence mode="popLayout">
-            {filtered.length > 0 ? (
-              <motion.div
-                key="grid"
-                className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
-              >
-                {filtered.map((c, i) => (
-                  <motion.article
-                    key={c.slug}
-                    layout
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.4, delay: i * 0.04 }}
-                    className="group card-soft flex flex-col p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-24px_rgba(2,12,27,0.25)]"
-                  >
-                    {/* Badges + icon */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="rounded-full bg-cloud px-3 py-1 text-xs font-medium text-sea ring-1 ring-sea/20">
-                          {c.sector}
-                        </span>
-                        <span className="rounded-full border border-hairline px-3 py-1 text-xs font-medium text-muted-foreground">
-                          {c.solution}
-                        </span>
-                      </div>
-                      <span className="shrink-0 grid h-9 w-9 place-items-center rounded-full border border-hairline text-muted-foreground transition-colors group-hover:border-sea group-hover:bg-sea group-hover:text-white">
-                        <ArrowUpRight className="h-4 w-4" />
+          {filtered.length > 0 ? (
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((c) => (
+                <article
+                  key={c.slug}
+                  className="group card-soft flex flex-col p-7 transition-shadow duration-200 hover:shadow-[0_24px_48px_-24px_rgba(2,12,27,0.25)]"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      <span className="rounded-full bg-cloud px-3 py-1 text-xs font-medium text-sea ring-1 ring-sea/20">
+                        {c.sector}
+                      </span>
+                      <span className="rounded-full border border-hairline px-3 py-1 text-xs font-medium text-muted-foreground">
+                        {c.solution}
                       </span>
                     </div>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-hairline text-muted-foreground transition-colors group-hover:border-sea group-hover:bg-sea group-hover:text-white">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </div>
 
-                    {/* Title + client */}
-                    <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-foreground">
-                      {c.title}
-                    </h3>
-                    <p className="mt-1 text-xs font-medium text-sea">{c.client}</p>
+                  <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-foreground">
+                    {c.title}
+                  </h3>
+                  <p className="mt-1 text-xs font-medium text-sea">{c.client}</p>
 
-                    {/* Description */}
-                    <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
-                      {c.desc}
-                    </p>
+                  <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
+                    {c.desc}
+                  </p>
 
-                    {/* Highlight */}
-                    {c.highlight && (
-                      <div className="mt-5 rounded-xl bg-sea/8 px-4 py-2.5">
-                        <p className="text-xs font-medium text-sea">{c.highlight}</p>
-                      </div>
-                    )}
-
-                    {/* Tech stack */}
-                    <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 border-t border-hairline pt-5">
-                      {c.tech.map((t) => (
-                        <span key={t} className="font-mono text-xs text-muted-foreground">
-                          {t}
-                        </span>
-                      ))}
+                  {c.highlight && (
+                    <div className="mt-5 rounded-xl bg-sea/8 px-4 py-2.5">
+                      <p className="text-xs font-medium text-sea">{c.highlight}</p>
                     </div>
-                  </motion.article>
-                ))}
-              </motion.div>
-            ) : (
-              <EmptyState key="empty" onReset={resetFilters} />
-            )}
-          </AnimatePresence>
+                  )}
+
+                  <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 border-t border-hairline pt-5">
+                    {c.tech.map((t) => (
+                      <span key={t} className="font-mono text-xs text-muted-foreground">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <EmptyState onReset={resetFilters} />
+          )}
         </div>
       </section>
 

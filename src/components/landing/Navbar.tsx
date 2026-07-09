@@ -2,21 +2,7 @@ import { useEffect, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
-
-const hashLinks = [
-  { hash: "servicos", label: "Serviços" },
-  { hash: "processo", label: "Processo" },
-];
-
-function scrollToHash(e: MouseEvent<HTMLAnchorElement>, hash: string, onDone?: () => void) {
-  e.preventDefault();
-  const target = document.getElementById(hash);
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", `#${hash}`);
-  }
-  onDone?.();
-}
+import { WhatWeDoMenu } from "./WhatWeDoMenu";
 
 export function Wordmark({ className = "" }: { className?: string }) {
   const { pathname } = useLocation();
@@ -48,7 +34,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -61,19 +46,6 @@ export function Navbar() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
-
-  function navHref(hash: string) {
-    return isHome ? `#${hash}` : `/#${hash}`;
-  }
-
-  function handleHashClick(
-    e: MouseEvent<HTMLAnchorElement>,
-    hash: string,
-    onDone?: () => void,
-  ) {
-    if (isHome) scrollToHash(e, hash, onDone);
-    else onDone?.();
-  }
 
   return (
     <motion.header
@@ -90,17 +62,7 @@ export function Navbar() {
         <Wordmark />
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {hashLinks.map((l) => (
-            <a
-              key={l.hash}
-              href={navHref(l.hash)}
-              onClick={(e) => handleHashClick(e, l.hash)}
-              className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {l.label}
-              <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          <WhatWeDoMenu variant="desktop" />
           <Link
             to="/sobre"
             className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
@@ -143,16 +105,7 @@ export function Navbar() {
       {open && (
         <div className="border-t border-hairline bg-background/95 backdrop-blur-md lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
-            {hashLinks.map((l) => (
-              <a
-                key={l.hash}
-                href={navHref(l.hash)}
-                onClick={(e) => handleHashClick(e, l.hash, () => setOpen(false))}
-                className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground"
-              >
-                {l.label}
-              </a>
-            ))}
+            <WhatWeDoMenu variant="mobile" onNavigate={() => setOpen(false)} />
             <Link
               to="/sobre"
               onClick={() => setOpen(false)}

@@ -15,6 +15,20 @@ import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CasesRouteImport } from './routes/cases'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SetoresVarejoRouteImport } from './routes/setores/varejo'
+import { Route as SetoresSaudeRouteImport } from './routes/setores/saude'
+import { Route as SetoresSaasB2bRouteImport } from './routes/setores/saas-b2b'
+import { Route as SetoresLogisticaRouteImport } from './routes/setores/logistica'
+import { Route as SetoresIndustriaRouteImport } from './routes/setores/industria'
+import { Route as SetoresFintechRouteImport } from './routes/setores/fintech'
+import { Route as SetoresEducacaoRouteImport } from './routes/setores/educacao'
+import { Route as ServicosMobileRouteImport } from './routes/servicos/mobile'
+import { Route as ServicosInteligenciaArtificialRouteImport } from './routes/servicos/inteligencia-artificial'
+import { Route as ServicosIntegracaoDeSistemasRouteImport } from './routes/servicos/integracao-de-sistemas'
+import { Route as ServicosErpCrmRouteImport } from './routes/servicos/erp-crm'
+import { Route as ServicosDesenvolvimentoWebRouteImport } from './routes/servicos/desenvolvimento-web'
+import { Route as ServicosConsultoriaRouteImport } from './routes/servicos/consultoria'
+import { Route as ServicosAutomacaoRouteImport } from './routes/servicos/automacao'
 
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
@@ -46,6 +60,79 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SetoresVarejoRoute = SetoresVarejoRouteImport.update({
+  id: '/setores/varejo',
+  path: '/setores/varejo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresSaudeRoute = SetoresSaudeRouteImport.update({
+  id: '/setores/saude',
+  path: '/setores/saude',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresSaasB2bRoute = SetoresSaasB2bRouteImport.update({
+  id: '/setores/saas-b2b',
+  path: '/setores/saas-b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresLogisticaRoute = SetoresLogisticaRouteImport.update({
+  id: '/setores/logistica',
+  path: '/setores/logistica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresIndustriaRoute = SetoresIndustriaRouteImport.update({
+  id: '/setores/industria',
+  path: '/setores/industria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresFintechRoute = SetoresFintechRouteImport.update({
+  id: '/setores/fintech',
+  path: '/setores/fintech',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetoresEducacaoRoute = SetoresEducacaoRouteImport.update({
+  id: '/setores/educacao',
+  path: '/setores/educacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosMobileRoute = ServicosMobileRouteImport.update({
+  id: '/servicos/mobile',
+  path: '/servicos/mobile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosInteligenciaArtificialRoute =
+  ServicosInteligenciaArtificialRouteImport.update({
+    id: '/servicos/inteligencia-artificial',
+    path: '/servicos/inteligencia-artificial',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosIntegracaoDeSistemasRoute =
+  ServicosIntegracaoDeSistemasRouteImport.update({
+    id: '/servicos/integracao-de-sistemas',
+    path: '/servicos/integracao-de-sistemas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosErpCrmRoute = ServicosErpCrmRouteImport.update({
+  id: '/servicos/erp-crm',
+  path: '/servicos/erp-crm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosDesenvolvimentoWebRoute =
+  ServicosDesenvolvimentoWebRouteImport.update({
+    id: '/servicos/desenvolvimento-web',
+    path: '/servicos/desenvolvimento-web',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosConsultoriaRoute = ServicosConsultoriaRouteImport.update({
+  id: '/servicos/consultoria',
+  path: '/servicos/consultoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosAutomacaoRoute = ServicosAutomacaoRouteImport.update({
+  id: '/servicos/automacao',
+  path: '/servicos/automacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +141,20 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/servicos/automacao': typeof ServicosAutomacaoRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/desenvolvimento-web': typeof ServicosDesenvolvimentoWebRoute
+  '/servicos/erp-crm': typeof ServicosErpCrmRoute
+  '/servicos/integracao-de-sistemas': typeof ServicosIntegracaoDeSistemasRoute
+  '/servicos/inteligencia-artificial': typeof ServicosInteligenciaArtificialRoute
+  '/servicos/mobile': typeof ServicosMobileRoute
+  '/setores/educacao': typeof SetoresEducacaoRoute
+  '/setores/fintech': typeof SetoresFintechRoute
+  '/setores/industria': typeof SetoresIndustriaRoute
+  '/setores/logistica': typeof SetoresLogisticaRoute
+  '/setores/saas-b2b': typeof SetoresSaasB2bRoute
+  '/setores/saude': typeof SetoresSaudeRoute
+  '/setores/varejo': typeof SetoresVarejoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +163,20 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/servicos/automacao': typeof ServicosAutomacaoRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/desenvolvimento-web': typeof ServicosDesenvolvimentoWebRoute
+  '/servicos/erp-crm': typeof ServicosErpCrmRoute
+  '/servicos/integracao-de-sistemas': typeof ServicosIntegracaoDeSistemasRoute
+  '/servicos/inteligencia-artificial': typeof ServicosInteligenciaArtificialRoute
+  '/servicos/mobile': typeof ServicosMobileRoute
+  '/setores/educacao': typeof SetoresEducacaoRoute
+  '/setores/fintech': typeof SetoresFintechRoute
+  '/setores/industria': typeof SetoresIndustriaRoute
+  '/setores/logistica': typeof SetoresLogisticaRoute
+  '/setores/saas-b2b': typeof SetoresSaasB2bRoute
+  '/setores/saude': typeof SetoresSaudeRoute
+  '/setores/varejo': typeof SetoresVarejoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +186,20 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/servicos/automacao': typeof ServicosAutomacaoRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/desenvolvimento-web': typeof ServicosDesenvolvimentoWebRoute
+  '/servicos/erp-crm': typeof ServicosErpCrmRoute
+  '/servicos/integracao-de-sistemas': typeof ServicosIntegracaoDeSistemasRoute
+  '/servicos/inteligencia-artificial': typeof ServicosInteligenciaArtificialRoute
+  '/servicos/mobile': typeof ServicosMobileRoute
+  '/setores/educacao': typeof SetoresEducacaoRoute
+  '/setores/fintech': typeof SetoresFintechRoute
+  '/setores/industria': typeof SetoresIndustriaRoute
+  '/setores/logistica': typeof SetoresLogisticaRoute
+  '/setores/saas-b2b': typeof SetoresSaasB2bRoute
+  '/setores/saude': typeof SetoresSaudeRoute
+  '/setores/varejo': typeof SetoresVarejoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +210,20 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sobre'
     | '/termos-de-uso'
+    | '/servicos/automacao'
+    | '/servicos/consultoria'
+    | '/servicos/desenvolvimento-web'
+    | '/servicos/erp-crm'
+    | '/servicos/integracao-de-sistemas'
+    | '/servicos/inteligencia-artificial'
+    | '/servicos/mobile'
+    | '/setores/educacao'
+    | '/setores/fintech'
+    | '/setores/industria'
+    | '/setores/logistica'
+    | '/setores/saas-b2b'
+    | '/setores/saude'
+    | '/setores/varejo'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +232,20 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sobre'
     | '/termos-de-uso'
+    | '/servicos/automacao'
+    | '/servicos/consultoria'
+    | '/servicos/desenvolvimento-web'
+    | '/servicos/erp-crm'
+    | '/servicos/integracao-de-sistemas'
+    | '/servicos/inteligencia-artificial'
+    | '/servicos/mobile'
+    | '/setores/educacao'
+    | '/setores/fintech'
+    | '/setores/industria'
+    | '/setores/logistica'
+    | '/setores/saas-b2b'
+    | '/setores/saude'
+    | '/setores/varejo'
   id:
     | '__root__'
     | '/'
@@ -97,6 +254,20 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sobre'
     | '/termos-de-uso'
+    | '/servicos/automacao'
+    | '/servicos/consultoria'
+    | '/servicos/desenvolvimento-web'
+    | '/servicos/erp-crm'
+    | '/servicos/integracao-de-sistemas'
+    | '/servicos/inteligencia-artificial'
+    | '/servicos/mobile'
+    | '/setores/educacao'
+    | '/setores/fintech'
+    | '/setores/industria'
+    | '/setores/logistica'
+    | '/setores/saas-b2b'
+    | '/setores/saude'
+    | '/setores/varejo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +277,20 @@ export interface RootRouteChildren {
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SobreRoute: typeof SobreRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
+  ServicosAutomacaoRoute: typeof ServicosAutomacaoRoute
+  ServicosConsultoriaRoute: typeof ServicosConsultoriaRoute
+  ServicosDesenvolvimentoWebRoute: typeof ServicosDesenvolvimentoWebRoute
+  ServicosErpCrmRoute: typeof ServicosErpCrmRoute
+  ServicosIntegracaoDeSistemasRoute: typeof ServicosIntegracaoDeSistemasRoute
+  ServicosInteligenciaArtificialRoute: typeof ServicosInteligenciaArtificialRoute
+  ServicosMobileRoute: typeof ServicosMobileRoute
+  SetoresEducacaoRoute: typeof SetoresEducacaoRoute
+  SetoresFintechRoute: typeof SetoresFintechRoute
+  SetoresIndustriaRoute: typeof SetoresIndustriaRoute
+  SetoresLogisticaRoute: typeof SetoresLogisticaRoute
+  SetoresSaasB2bRoute: typeof SetoresSaasB2bRoute
+  SetoresSaudeRoute: typeof SetoresSaudeRoute
+  SetoresVarejoRoute: typeof SetoresVarejoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +337,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/setores/varejo': {
+      id: '/setores/varejo'
+      path: '/setores/varejo'
+      fullPath: '/setores/varejo'
+      preLoaderRoute: typeof SetoresVarejoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/saude': {
+      id: '/setores/saude'
+      path: '/setores/saude'
+      fullPath: '/setores/saude'
+      preLoaderRoute: typeof SetoresSaudeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/saas-b2b': {
+      id: '/setores/saas-b2b'
+      path: '/setores/saas-b2b'
+      fullPath: '/setores/saas-b2b'
+      preLoaderRoute: typeof SetoresSaasB2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/logistica': {
+      id: '/setores/logistica'
+      path: '/setores/logistica'
+      fullPath: '/setores/logistica'
+      preLoaderRoute: typeof SetoresLogisticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/industria': {
+      id: '/setores/industria'
+      path: '/setores/industria'
+      fullPath: '/setores/industria'
+      preLoaderRoute: typeof SetoresIndustriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/fintech': {
+      id: '/setores/fintech'
+      path: '/setores/fintech'
+      fullPath: '/setores/fintech'
+      preLoaderRoute: typeof SetoresFintechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setores/educacao': {
+      id: '/setores/educacao'
+      path: '/setores/educacao'
+      fullPath: '/setores/educacao'
+      preLoaderRoute: typeof SetoresEducacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/mobile': {
+      id: '/servicos/mobile'
+      path: '/servicos/mobile'
+      fullPath: '/servicos/mobile'
+      preLoaderRoute: typeof ServicosMobileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/inteligencia-artificial': {
+      id: '/servicos/inteligencia-artificial'
+      path: '/servicos/inteligencia-artificial'
+      fullPath: '/servicos/inteligencia-artificial'
+      preLoaderRoute: typeof ServicosInteligenciaArtificialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/integracao-de-sistemas': {
+      id: '/servicos/integracao-de-sistemas'
+      path: '/servicos/integracao-de-sistemas'
+      fullPath: '/servicos/integracao-de-sistemas'
+      preLoaderRoute: typeof ServicosIntegracaoDeSistemasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/erp-crm': {
+      id: '/servicos/erp-crm'
+      path: '/servicos/erp-crm'
+      fullPath: '/servicos/erp-crm'
+      preLoaderRoute: typeof ServicosErpCrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/desenvolvimento-web': {
+      id: '/servicos/desenvolvimento-web'
+      path: '/servicos/desenvolvimento-web'
+      fullPath: '/servicos/desenvolvimento-web'
+      preLoaderRoute: typeof ServicosDesenvolvimentoWebRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/consultoria': {
+      id: '/servicos/consultoria'
+      path: '/servicos/consultoria'
+      fullPath: '/servicos/consultoria'
+      preLoaderRoute: typeof ServicosConsultoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/automacao': {
+      id: '/servicos/automacao'
+      path: '/servicos/automacao'
+      fullPath: '/servicos/automacao'
+      preLoaderRoute: typeof ServicosAutomacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +445,20 @@ const rootRouteChildren: RootRouteChildren = {
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SobreRoute: SobreRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
+  ServicosAutomacaoRoute: ServicosAutomacaoRoute,
+  ServicosConsultoriaRoute: ServicosConsultoriaRoute,
+  ServicosDesenvolvimentoWebRoute: ServicosDesenvolvimentoWebRoute,
+  ServicosErpCrmRoute: ServicosErpCrmRoute,
+  ServicosIntegracaoDeSistemasRoute: ServicosIntegracaoDeSistemasRoute,
+  ServicosInteligenciaArtificialRoute: ServicosInteligenciaArtificialRoute,
+  ServicosMobileRoute: ServicosMobileRoute,
+  SetoresEducacaoRoute: SetoresEducacaoRoute,
+  SetoresFintechRoute: SetoresFintechRoute,
+  SetoresIndustriaRoute: SetoresIndustriaRoute,
+  SetoresLogisticaRoute: SetoresLogisticaRoute,
+  SetoresSaasB2bRoute: SetoresSaasB2bRoute,
+  SetoresSaudeRoute: SetoresSaudeRoute,
+  SetoresVarejoRoute: SetoresVarejoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

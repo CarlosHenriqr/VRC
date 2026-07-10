@@ -32,9 +32,18 @@ export const contactSchema = z.object({
   phone: z
     .string()
     .trim()
-    .min(8, "Telefone inválido")
-    .max(30, "Telefone muito longo")
-    .regex(/^[\d\s()+.-]+$/, "Telefone contém caracteres inválidos"),
+    .min(1, "Informe o telefone")
+    .refine(
+      (value) => {
+        const digits = value.replace(/\D/g, "");
+        return digits.length === 10 || digits.length === 11;
+      },
+      "Informe um telefone válido com DDD",
+    )
+    .refine(
+      (value) => /^\(\d{2}\) \d{4,5}-\d{4}$/.test(value),
+      "Use o formato (11) 99999-9999",
+    ),
   source: z.enum(CONTACT_SOURCES, {
     required_error: "Informe como nos encontrou",
     invalid_type_error: "Informe como nos encontrou",

@@ -9,6 +9,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/CtaFooter";
 import { CONTACT_SERVICES, CONTACT_SOURCES } from "@/lib/contact-constants";
 import { sendContact, contactSchema, type ContactInput } from "@/lib/send-contact";
+import { formatPhoneBR } from "@/lib/phone";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const CLIENT_COOLDOWN_MS = 60_000;
@@ -41,7 +42,7 @@ function ContatoPage() {
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { services: [], website: "" },
+    defaultValues: { services: [], website: "", phone: "" },
   });
 
   const selectedServices = watch("services");
@@ -64,7 +65,7 @@ function ContatoPage() {
       await sendContact({ data });
       setSent(true);
       setCooldownUntil(Date.now() + CLIENT_COOLDOWN_MS);
-      reset({ services: [], website: "" });
+      reset({ services: [], website: "", phone: "" });
       toast.success("Mensagem enviada! Entraremos em contato em breve.");
     } catch (err) {
       const msg = getErrorMessage(err);
@@ -225,13 +226,24 @@ function ContatoPage() {
                   {/* Phone + Source */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <Field label="Telefone *" error={errors.phone?.message}>
-                      <input
-                        {...register("phone")}
-                        type="tel"
-                        maxLength={30}
-                        autoComplete="tel"
-                        placeholder="+55 (11) 9 0000-0000"
-                        className={inputClass(!!errors.phone)}
+                      <Controller
+                        control={control}
+                        name="phone"
+                        render={({ field }) => (
+                          <input
+                            type="tel"
+                            inputMode="numeric"
+                            autoComplete="tel"
+                            maxLength={15}
+                            placeholder="(11) 99999-9999"
+                            className={inputClass(!!errors.phone)}
+                            value={field.value ?? ""}
+                            onBlur={field.onBlur}
+                            name={field.name}
+                            ref={field.ref}
+                            onChange={(e) => field.onChange(formatPhoneBR(e.target.value))}
+                          />
+                        )}
                       />
                     </Field>
                     <Field label="Como nos encontrou *" error={errors.source?.message}>

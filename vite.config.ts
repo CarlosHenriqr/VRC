@@ -13,7 +13,6 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    preset: "node-server",
-    envPrefix: ["RESEND_", "CONTACT_", "FROM_"],
+    preset: "vercel",
   },
 });

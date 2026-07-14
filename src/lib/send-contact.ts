@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { getContactEnv } from "./contact-env";
 import { CONTACT_SERVICES, CONTACT_SOURCES } from "./contact-constants";
+import { BRAND } from "./brand";
 import {
   assertSafeText,
   escapeHtml,
@@ -116,7 +117,7 @@ export const sendContact = createServerFn({ method: "POST" })
       <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb;margin:0 auto">
         <tr>
           <td style="background:#011829;padding:28px 32px">
-            <p style="margin:0;font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.04em">VRC Solutions</p>
+            <p style="margin:0;font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.04em">${escapeHtml(BRAND.fullName)}</p>
             <p style="margin:6px 0 0;font-size:12px;color:#c0e6ff;font-family:monospace;text-transform:uppercase;letter-spacing:0.08em">Novo contato via site</p>
           </td>
         </tr>

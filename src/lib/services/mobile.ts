@@ -6,7 +6,7 @@ export const mobileService: ServiceContent = {
   name: "Mobile",
   caseSolution: "Mobile",
   seo: {
-    title: "Mobile — VRC Solutions",
+    title: "Mobile — CORA Soluções Digitais",
     description:
       "Apps nativos e híbridos para Android e iOS — experiência premium, performance e integração com backends e APIs.",
   },
@@ -57,7 +57,7 @@ export const mobileService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Mobile com engenharia de produto",
     items: [
       {

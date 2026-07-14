@@ -6,6 +6,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
 import { getCasesBySector } from "@/lib/cases";
 import type { SectorContent } from "@/lib/sectors/types";
+import { FEATURES } from "@/lib/features";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -32,7 +33,7 @@ function FadeIn({
 }
 
 export function SectorPage({ content }: { content: SectorContent }) {
-  const cases = getCasesBySector(content.caseSector);
+  const cases = FEATURES.cases ? getCasesBySector(content.caseSector) : [];
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (

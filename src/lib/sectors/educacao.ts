@@ -6,7 +6,7 @@ export const educacaoSector: SectorContent = {
   name: "Educação",
   caseSector: "Educação",
   seo: {
-    title: "Educação — VRC Solutions",
+    title: "Educação — CORA Soluções Digitais",
     description:
       "Software sob medida para educação: LMS, trilhas de aprendizado, portais acadêmicos, apps e soluções com IA para instituições e edtechs.",
   },
@@ -57,7 +57,7 @@ export const educacaoSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para aprendizado em escala",
     items: [
       {

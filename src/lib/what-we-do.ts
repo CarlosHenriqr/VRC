@@ -72,8 +72,7 @@ export const WHAT_WE_DO_SECTIONS: WhatWeDoSection[] = [
     title: "Expertise",
     links: [
       { kind: "hash", label: "Nosso processo", hash: "processo" },
-      { kind: "hash", label: "Por que a VRC", hash: "manifesto" },
-      { kind: "route", label: "Cases", to: "/cases" },
+      { kind: "hash", label: "Por que a CORA", hash: "manifesto" },
       { kind: "route", label: "Sobre a equipe", to: "/sobre" },
     ],
   },

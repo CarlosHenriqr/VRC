@@ -6,7 +6,7 @@ export const saasB2bSector: SectorContent = {
   name: "SaaS B2B",
   caseSector: "SaaS B2B",
   seo: {
-    title: "SaaS B2B — VRC Solutions",
+    title: "SaaS B2B — CORA Soluções Digitais",
     description:
       "Desenvolvimento de plataformas SaaS B2B sob medida: multi-tenant, billing, onboarding, integrações e painéis com foco em retenção e escala.",
   },
@@ -57,7 +57,7 @@ export const saasB2bSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para produtos que precisam escalar",
     items: [
       {

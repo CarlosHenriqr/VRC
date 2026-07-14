@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { BRAND } from "@/lib/brand";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CookieConsent } from "../components/landing/CookieConsent";
 import { FirebaseAnalytics } from "../components/landing/FirebaseAnalytics";
@@ -76,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VRC Solutions — Engenharia de software sob medida" },
+      { title: "CORA Soluções Digitais — Engenharia de software sob medida" },
       {
         name: "description",
         content:
           "Desenvolvemos sistemas, aplicativos, automações e soluções de IA sob medida para acelerar o crescimento da sua empresa.",
       },
-      { property: "og:title", content: "VRC Solutions — Engenharia de software sob medida" },
+      { property: "og:title", content: "CORA Soluções Digitais — Engenharia de software sob medida" },
       {
         property: "og:description",
         content: "Sistemas, mobile, automações e IA para transformar desafios em resultado.",
@@ -91,6 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "icon", href: BRAND.logoSrc, type: "image/svg+xml" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },

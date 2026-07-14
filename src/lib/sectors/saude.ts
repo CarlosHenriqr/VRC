@@ -6,7 +6,7 @@ export const saudeSector: SectorContent = {
   name: "Saúde",
   caseSector: "Saúde",
   seo: {
-    title: "Saúde — VRC Solutions",
+    title: "Saúde — CORA Soluções Digitais",
     description:
       "Software sob medida para saúde: agendamento, prontuário eletrônico, apps para clínicas e integrações com planos e sistemas hospitalares.",
   },
@@ -57,7 +57,7 @@ export const saudeSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para o cuidado e a operação clínica",
     items: [
       {

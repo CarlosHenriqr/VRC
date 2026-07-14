@@ -6,7 +6,7 @@ export const erpCrmService: ServiceContent = {
   name: "ERP / CRM",
   caseSolution: "Desenvolvimento Web",
   seo: {
-    title: "ERP / CRM — VRC Solutions",
+    title: "ERP / CRM — CORA Soluções Digitais",
     description:
       "ERP e CRM sob medida: módulos de vendas, estoque, operações e relacionamento com clientes — integrados ao seu negócio.",
   },
@@ -57,7 +57,7 @@ export const erpCrmService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Gestão feita para o seu processo",
     items: [
       {

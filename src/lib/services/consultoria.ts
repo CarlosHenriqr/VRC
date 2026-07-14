@@ -6,7 +6,7 @@ export const consultoriaService: ServiceContent = {
   name: "Consultoria",
   caseSolution: "",
   seo: {
-    title: "Consultoria — VRC Solutions",
+    title: "Consultoria — CORA Soluções Digitais",
     description:
       "Consultoria em arquitetura, modernização de sistemas e transformação digital — diagnóstico, roadmap e acompanhamento técnico.",
   },
@@ -57,7 +57,7 @@ export const consultoriaService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Consultoria que vira execução",
     items: [
       {

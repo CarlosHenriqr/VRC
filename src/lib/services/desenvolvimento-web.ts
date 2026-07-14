@@ -6,7 +6,7 @@ export const desenvolvimentoWebService: ServiceContent = {
   name: "Desenvolvimento Web",
   caseSolution: "Desenvolvimento Web",
   seo: {
-    title: "Desenvolvimento Web — VRC Solutions",
+    title: "Desenvolvimento Web — CORA Soluções Digitais",
     description:
       "Sistemas, plataformas SaaS, ERPs, CRMs e portais corporativos sob medida — arquitetura sólida, UX clara e entrega incremental.",
   },
@@ -57,7 +57,7 @@ export const desenvolvimentoWebService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia web feita para durar",
     items: [
       {

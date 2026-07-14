@@ -1,4 +1,5 @@
 import { loadEnv } from "./load-env";
+import { BRAND } from "./brand";
 
 export function getContactEnv() {
   loadEnv();
@@ -6,6 +7,6 @@ export function getContactEnv() {
   return {
     apiKey: process.env.RESEND_API_KEY?.trim(),
     to: process.env.CONTACT_EMAIL?.trim(),
-    from: process.env.FROM_EMAIL?.trim() || "VRC Solutions <onboarding@resend.dev>",
+    from: process.env.FROM_EMAIL?.trim() || `${BRAND.fullName} <onboarding@resend.dev>`,
   };
 }

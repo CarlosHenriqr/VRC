@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
+import { BrandLogo } from "./BrandLogo";
+import { BRAND } from "@/lib/brand";
 
 type LegalLayoutProps = {
   title: string;
@@ -12,13 +14,8 @@ export function LegalLayout({ title, updatedAt, children }: LegalLayoutProps) {
   return (
     <div className="relative z-10 min-h-screen bg-background text-foreground">
       <header className="border-b border-hairline bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
-          <Link to="/" className="group flex items-center gap-2">
-            <span className="font-display text-xl font-bold tracking-[-0.04em] text-foreground">
-              VRC Solutions
-            </span>
-            <span className="h-2 w-2 rounded-full bg-sea transition-transform duration-300 group-hover:scale-125" />
-          </Link>
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
+          <BrandLogo showTagline sizeClassName="text-xl" />
           <Link
             to="/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -43,7 +40,9 @@ export function LegalLayout({ title, updatedAt, children }: LegalLayoutProps) {
 
       <footer className="border-t border-hairline py-8">
         <div className="mx-auto flex max-w-3xl flex-col items-start justify-between gap-4 px-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <div>© {new Date().getFullYear()} VRC Solutions. Todos os direitos reservados.</div>
+          <div>
+            © {new Date().getFullYear()} {BRAND.fullName}. Todos os direitos reservados.
+          </div>
           <div className="flex gap-4">
             <Link to="/politica-de-privacidade" className="transition-colors hover:text-foreground">
               Política de Privacidade

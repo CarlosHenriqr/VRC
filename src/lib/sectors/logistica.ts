@@ -6,7 +6,7 @@ export const logisticaSector: SectorContent = {
   name: "Logística",
   caseSector: "Logística",
   seo: {
-    title: "Logística — VRC Solutions",
+    title: "Logística — CORA Soluções Digitais",
     description:
       "Software sob medida para logística: rastreamento em tempo real, gestão de frota, WMS, roteirização e integrações com transportadoras.",
   },
@@ -57,7 +57,7 @@ export const logisticaSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para operação em movimento",
     items: [
       {

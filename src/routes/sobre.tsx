@@ -32,17 +32,28 @@ const team = [
     photoClass: "object-[center_22%]",
     paragraphs: [
       <>
-        Desenvolvedor Back-End e estudante de Análise e Desenvolvimento de Sistemas, com foco na criação de{" "}
-        <strong className="font-medium text-foreground">soluções modernas, escaláveis e bem estruturadas</strong>.
-        Apaixonado por tecnologia e aprendizado contínuo, busca transformar desafios em aplicações eficientes,
-        priorizando qualidade, desempenho e boas práticas de desenvolvimento.
+        Sou desenvolvedor de software e fundador da empresa, dedicado à criação de{" "}
+        <strong className="font-medium text-foreground">
+          soluções digitais que unem tecnologia, inovação e experiência do usuário
+        </strong>
+        .
       </>,
       <>
-        Movido pela curiosidade e pela evolução constante, acredita no{" "}
-        <strong className="font-medium text-foreground">trabalho em equipe</strong>, na comunicação clara e na
-        colaboração como pilares para o sucesso de qualquer projeto. Está sempre em busca de novos desafios que
-        permitam expandir seus conhecimentos e contribuir com soluções inovadoras, mantendo o compromisso com a
-        excelência técnica e o desenvolvimento profissional.
+        Acredito que a tecnologia deve simplificar processos, impulsionar negócios e gerar resultados reais. Por
+        isso, mantenho um compromisso constante com a evolução técnica, acompanhando as principais tendências do
+        mercado e aplicando as melhores práticas de desenvolvimento em cada projeto.
+      </>,
+      <>
+        Meu objetivo é construir{" "}
+        <strong className="font-medium text-foreground">
+          produtos digitais modernos, confiáveis e preparados para crescer
+        </strong>
+        , estabelecendo relações de confiança com clientes e parceiros por meio de qualidade, transparência e
+        dedicação.
+      </>,
+      <>
+        Cada projeto representa uma oportunidade de inovar, criar valor e contribuir para o sucesso de quem
+        confia no nosso trabalho.
       </>,
     ],
   },
@@ -262,11 +273,11 @@ function TeamMemberRow({ member, index }: { member: TeamMember; index: number })
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Sobre — VRC Solutions" },
+      { title: "Sobre — CORA Soluções Digitais" },
       {
         name: "description",
         content:
-          "Conheça a VRC Solutions: engenharia de software sob medida, automação e IA para transformar negócios com inovação.",
+          "Conheça a CORA Soluções Digitais: engenharia de software sob medida, automação e IA para transformar negócios com inovação.",
       },
     ],
   }),
@@ -337,7 +348,7 @@ function SobrePage() {
           <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
             <FadeIn delay={0.05} className="space-y-5 text-[1.05rem] leading-relaxed text-muted-foreground">
               <p>
-                A <strong className="font-medium text-foreground">VRC Solutions</strong> nasceu com
+                A <strong className="font-medium text-foreground">CORA Soluções Digitais</strong> nasceu com
                 a missão de entregar{" "}
                 <strong className="font-medium text-foreground">transformação digital</strong> de
                 verdade para empresas que precisam de software sob medida — sem atalhos, sem
@@ -408,7 +419,7 @@ function SobrePage() {
         <div className="mx-auto max-w-6xl px-6">
           <FadeIn className="text-center">
             <h2 className="font-display text-3xl font-bold tracking-[-0.04em] sm:text-4xl lg:text-5xl">
-              Quem faz a VRC Solutions
+              Quem faz a CORA
             </h2>
           </FadeIn>
 

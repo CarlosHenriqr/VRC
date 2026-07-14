@@ -6,7 +6,7 @@ export const fintechSector: SectorContent = {
   name: "Fintech",
   caseSector: "Fintech",
   seo: {
-    title: "Fintech — VRC Solutions",
+    title: "Fintech — CORA Soluções Digitais",
     description:
       "Desenvolvimento de software sob medida para fintechs: APIs, apps, Open Finance, pagamentos e soluções escaláveis com foco em segurança e desempenho.",
   },
@@ -57,7 +57,7 @@ export const fintechSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para o ritmo do mercado financeiro",
     items: [
       {

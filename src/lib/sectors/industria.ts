@@ -6,7 +6,7 @@ export const industriaSector: SectorContent = {
   name: "Indústria",
   caseSector: "Indústria",
   seo: {
-    title: "Indústria — VRC Solutions",
+    title: "Indústria — CORA Soluções Digitais",
     description:
       "Software sob medida para indústria: ERP modular, MES, integração com chão de fábrica, BI e automação de processos industriais.",
   },
@@ -57,7 +57,7 @@ export const industriaSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para o ritmo da planta",
     items: [
       {

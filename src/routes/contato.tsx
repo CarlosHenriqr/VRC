@@ -4,12 +4,14 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { Mail, Phone, MessageCircle, Linkedin, Send, Check } from "lucide-react";
+import { Mail, Phone, MessageCircle, Instagram, Linkedin, Send, Check } from "lucide-react";
+import { FEATURES } from "@/lib/features";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/CtaFooter";
 import { CONTACT_SERVICES, CONTACT_SOURCES } from "@/lib/contact-constants";
 import { sendContact, contactSchema, type ContactInput } from "@/lib/send-contact";
 import { formatPhoneBR } from "@/lib/phone";
+import { BRAND } from "@/lib/brand";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const CLIENT_COOLDOWN_MS = 60_000;
@@ -17,11 +19,11 @@ const CLIENT_COOLDOWN_MS = 60_000;
 export const Route = createFileRoute("/contato")({
   head: () => ({
     meta: [
-      { title: "Contato — VRC Solutions" },
+      { title: "Contato — CORA Soluções Digitais" },
       {
         name: "description",
         content:
-          "Entre em contato com a VRC Solutions. Nossa equipe está pronta para ajudar você a construir a solução digital certa.",
+          "Entre em contato com a CORA Soluções Digitais. Nossa equipe está pronta para ajudar você a construir a solução digital certa.",
       },
     ],
   }),
@@ -317,15 +319,17 @@ function ContatoPage() {
                   <ContactItem
                     icon={<Mail className="h-4 w-4" strokeWidth={1.75} />}
                     label="E-mail"
-                    value="contato@vrcsolutions.com.br"
-                    href="mailto:contato@vrcsolutions.com.br"
+                    value={BRAND.email}
+                    href={`mailto:${BRAND.email}`}
                   />
-                  <ContactItem
-                    icon={<Phone className="h-4 w-4" strokeWidth={1.75} />}
-                    label="Telefone"
-                    value="+55 (11) 4000-0000"
-                    href="tel:+551140000000"
-                  />
+                  {FEATURES.phone && (
+                    <ContactItem
+                      icon={<Phone className="h-4 w-4" strokeWidth={1.75} />}
+                      label="Telefone"
+                      value="+55 (11) 4000-0000"
+                      href="tel:+551140000000"
+                    />
+                  )}
                   <ContactItem
                     icon={<MessageCircle className="h-4 w-4" strokeWidth={1.75} />}
                     label="WhatsApp"
@@ -339,12 +343,20 @@ function ContatoPage() {
                 <h3 className="kicker mb-5">Redes sociais</h3>
                 <div className="flex gap-2.5">
                   {[
-                    { icon: Linkedin, label: "LinkedIn", href: "#" },
-
+                    {
+                      icon: Instagram,
+                      label: "Instagram",
+                      href: "https://www.instagram.com/tech.cora/",
+                    },
+                    ...(FEATURES.linkedin
+                      ? [{ icon: Linkedin, label: "LinkedIn", href: "#" as const }]
+                      : []),
                   ].map((s) => (
                     <a
                       key={s.label}
                       href={s.href}
+                      target={s.href.startsWith("http") ? "_blank" : undefined}
+                      rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       aria-label={s.label}
                       className="grid h-10 w-10 place-items-center rounded-full border border-hairline text-muted-foreground transition-colors hover:border-sea hover:bg-sea hover:text-white"
                     >

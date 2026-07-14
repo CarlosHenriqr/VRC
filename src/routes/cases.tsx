@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Search, X, ArrowUpRight, RotateCcw } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
 import { CASES } from "@/lib/cases";
+import { FEATURES } from "@/lib/features";
 
 const ALL = "Todos";
 
@@ -12,13 +13,18 @@ const sectors = [ALL, ...Array.from(new Set(CASES.map((c) => c.sector))).sort()]
 const solutions = [ALL, ...Array.from(new Set(CASES.map((c) => c.solution))).sort()];
 
 export const Route = createFileRoute("/cases")({
+  beforeLoad: () => {
+    if (!FEATURES.cases) {
+      throw redirect({ to: "/" });
+    }
+  },
   head: () => ({
     meta: [
-      { title: "Cases — VRC Solutions" },
+      { title: "Cases — CORA Soluções Digitais" },
       {
         name: "description",
         content:
-          "Conheça os projetos entregues pela VRC Solutions para empresas em diferentes setores e segmentos.",
+          "Conheça os projetos entregues pela CORA Soluções Digitais para empresas em diferentes setores e segmentos.",
       },
     ],
   }),

@@ -6,7 +6,7 @@ export const inteligenciaArtificialService: ServiceContent = {
   name: "Inteligência Artificial",
   caseSolution: "Inteligência Artificial",
   seo: {
-    title: "Inteligência Artificial — VRC Solutions",
+    title: "Inteligência Artificial — CORA Soluções Digitais",
     description:
       "IA aplicada ao negócio: assistentes, análise preditiva, automação inteligente e integração de LLMs em produtos e operações.",
   },
@@ -57,7 +57,7 @@ export const inteligenciaArtificialService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "IA com engenharia de produto",
     items: [
       {

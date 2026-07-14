@@ -6,7 +6,7 @@ export const varejoSector: SectorContent = {
   name: "Varejo",
   caseSector: "Varejo",
   seo: {
-    title: "Varejo — VRC Solutions",
+    title: "Varejo — CORA Soluções Digitais",
     description:
       "Software sob medida para varejo: e-commerce, OMS, precificação, estoque, automações e integrações com marketplaces e ERPs.",
   },
@@ -57,7 +57,7 @@ export const varejoSector: SectorContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Engenharia feita para o ritmo do varejo",
     items: [
       {

@@ -4,11 +4,11 @@ import { LegalLayout, LegalSection } from "@/components/landing/LegalLayout";
 export const Route = createFileRoute("/politica-de-privacidade")({
   head: () => ({
     meta: [
-      { title: "Política de Privacidade — VRC Solutions" },
+      { title: "Política de Privacidade — CORA Soluções Digitais" },
       {
         name: "description",
         content:
-          "Saiba como a VRC Solutions coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD.",
+          "Saiba como a CORA Soluções Digitais coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD.",
       },
     ],
   }),
@@ -20,7 +20,7 @@ function PoliticaDePrivacidadePage() {
     <LegalLayout title="Política de Privacidade" updatedAt="7 de julho de 2026">
       <LegalSection title="1. Introdução">
         <p>
-          A VRC Solutions (&quot;nós&quot;, &quot;nosso&quot; ou &quot;Empresa&quot;) respeita a sua privacidade e
+          A CORA Soluções Digitais (&quot;nós&quot;, &quot;nosso&quot; ou &quot;Empresa&quot;) respeita a sua privacidade e
           está comprometida com a proteção dos dados pessoais tratados no âmbito de nossos
           serviços de engenharia de software, automação e soluções digitais.
         </p>
@@ -109,10 +109,10 @@ function PoliticaDePrivacidadePage() {
         <p>
           Para exercer seus direitos, entre em contato pelo e-mail{" "}
           <a
-            href="mailto:contato@nexora.com.br"
+            href="mailto:tech.cora.dev@gmail.com"
             className="text-sea underline-offset-4 hover:underline"
           >
-            contato@nexora.com.br
+            tech.cora.dev@gmail.com
           </a>
           . Responderemos dentro dos prazos legais aplicáveis.
         </p>

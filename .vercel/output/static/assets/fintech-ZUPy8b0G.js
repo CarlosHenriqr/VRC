@@ -1,0 +1,1 @@
+import{l as e,w as t}from"./index-BUIMY8Jd.js";import{t as n}from"./SectorPage-CkLi_gUu.js";var r=t();function i(){return(0,r.jsx)(n,{content:e})}export{i as component};

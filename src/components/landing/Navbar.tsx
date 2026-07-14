@@ -1,34 +1,12 @@
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { WhatWeDoMenu } from "./WhatWeDoMenu";
+import { BrandLogo } from "./BrandLogo";
+import { FEATURES } from "@/lib/features";
 
-export function Wordmark({ className = "" }: { className?: string }) {
-  const { pathname } = useLocation();
-  const isHome = pathname === "/";
-
-  function handleClick(e: MouseEvent<HTMLAnchorElement>) {
-    if (isHome) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      window.history.replaceState(null, "", "/");
-    }
-  }
-
-  return (
-    <Link
-      to="/"
-      onClick={handleClick}
-      className={`group flex items-center gap-2 ${className}`}
-    >
-      <span className="font-display text-2xl font-bold tracking-[-0.04em] text-foreground">
-        VRC Solutions
-      </span>
-      <span className="h-2 w-2 rounded-full bg-sea transition-transform duration-300 group-hover:scale-125" />
-    </Link>
-  );
-}
+export { BrandLogo, Wordmark } from "./BrandLogo";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +20,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -58,28 +35,30 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Wordmark />
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+        <BrandLogo showTagline sizeClassName="text-2xl sm:text-3xl" />
 
         <nav className="hidden items-center gap-8 lg:flex">
           <WhatWeDoMenu variant="desktop" />
           <Link
             to="/sobre"
-            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
+            className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground"
           >
             Sobre
             <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
           </Link>
-          <Link
-            to="/cases"
-            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
-          >
-            Cases
-            <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
-          </Link>
+          {FEATURES.cases && (
+            <Link
+              to="/cases"
+              className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground"
+            >
+              Cases
+              <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
+            </Link>
+          )}
           <Link
             to="/contato"
-            className="group relative text-sm font-medium transition-colors [&.active]:text-foreground text-muted-foreground hover:text-foreground"
+            className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground"
           >
             Contato
             <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-sea transition-all duration-300 group-hover:w-full [.active_&]:w-full" />
@@ -93,6 +72,7 @@ export function Navbar() {
         </div>
 
         <button
+          type="button"
           onClick={() => setOpen((v) => !v)}
           className="rounded-full border border-hairline p-2.5 text-foreground lg:hidden"
           aria-label="Abrir menu"
@@ -113,13 +93,15 @@ export function Navbar() {
             >
               Sobre
             </Link>
-            <Link
-              to="/cases"
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
-            >
-              Cases
-            </Link>
+            {FEATURES.cases && (
+              <Link
+                to="/cases"
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-cloud hover:text-foreground [&.active]:text-foreground"
+              >
+                Cases
+              </Link>
+            )}
             <Link
               to="/contato"
               onClick={() => setOpen(false)}

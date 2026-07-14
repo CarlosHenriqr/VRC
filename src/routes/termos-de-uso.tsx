@@ -4,11 +4,11 @@ import { LegalLayout, LegalSection } from "@/components/landing/LegalLayout";
 export const Route = createFileRoute("/termos-de-uso")({
   head: () => ({
     meta: [
-      { title: "Termos de Uso â€” VRC Solutions" },
+      { title: "Termos de Uso ? CORA Soluç?es Digitais" },
       {
         name: "description",
         content:
-          "Termos e condiÃ§Ãµes de uso do site e dos serviÃ§os oferecidos pela VRC Solutions.",
+          "Termos e condiç?es de uso do site e dos serviços oferecidos pela CORA Soluç?es Digitais.",
       },
     ],
   }),
@@ -18,107 +18,107 @@ export const Route = createFileRoute("/termos-de-uso")({
 function TermosDeUsoPage() {
   return (
     <LegalLayout title="Termos de Uso" updatedAt="7 de julho de 2026">
-      <LegalSection title="1. AceitaÃ§Ã£o dos termos">
+      <LegalSection title="1. Aceitaç?o dos termos">
         <p>
-          Ao acessar e utilizar o site da VRC Solutions (&quot;Site&quot;), vocÃª declara ter lido,
-          compreendido e concordado com estes Termos de Uso. Caso nÃ£o concorde com qualquer
-          disposiÃ§Ã£o, recomendamos que nÃ£o utilize o Site ou nossos serviÃ§os.
+          Ao acessar e utilizar o site da CORA Soluç?es Digitais (&quot;Site&quot;), voc? declara ter lido,
+          compreendido e concordado com estes Termos de Uso. Caso n?o concorde com qualquer
+          disposiç?o, recomendamos que n?o utilize o Site ou nossos serviços.
         </p>
       </LegalSection>
 
-      <LegalSection title="2. Sobre a VRC Solutions">
+      <LegalSection title="2. Sobre a CORA Soluç?es Digitais">
         <p>
-          A VRC Solutions atua no desenvolvimento de software sob medida, automaÃ§Ãµes, aplicativos
-          e soluÃ§Ãµes digitais para empresas. O Site tem carÃ¡ter informativo e comercial, destinado
-          Ã  apresentaÃ§Ã£o de serviÃ§os e ao contato com potenciais clientes.
+          A CORA Soluç?es Digitais atua no desenvolvimento de software sob medida, automaç?es, aplicativos
+          e soluç?es digitais para empresas. O Site tem caráter informativo e comercial, destinado
+          ? apresentaç?o de serviços e ao contato com potenciais clientes.
         </p>
       </LegalSection>
 
       <LegalSection title="3. Uso permitido">
-        <p>VocÃª concorda em utilizar o Site de forma lÃ­cita e de boa-fÃ©, abstendo-se de:</p>
+        <p>Voc? concorda em utilizar o Site de forma lícita e de boa-fé, abstendo-se de:</p>
         <ul className="list-disc space-y-2 pl-5">
-          <li>Violar leis aplicÃ¡veis ou direitos de terceiros;</li>
-          <li>Tentar acessar Ã¡reas restritas, sistemas ou dados sem autorizaÃ§Ã£o;</li>
+          <li>Violar leis aplicáveis ou direitos de terceiros;</li>
+          <li>Tentar acessar áreas restritas, sistemas ou dados sem autorizaç?o;</li>
           <li>
-            Introduzir vÃ­rus, malware ou qualquer cÃ³digo que possa comprometer a integridade do
+            Introduzir vírus, malware ou qualquer código que possa comprometer a integridade do
             Site;
           </li>
-          <li>Reproduzir, distribuir ou modificar conteÃºdos sem autorizaÃ§Ã£o prÃ©via por escrito.</li>
+          <li>Reproduzir, distribuir ou modificar conteúdos sem autorizaç?o prévia por escrito.</li>
         </ul>
       </LegalSection>
 
       <LegalSection title="4. Propriedade intelectual">
         <p>
-          Todo o conteÃºdo do Site â€” incluindo textos, layout, marcas, logotipos, imagens, cÃ³digo
-          e demais materiais â€” Ã© de propriedade da VRC Solutions ou de seus licenciadores, salvo
-          indicaÃ§Ã£o em contrÃ¡rio. Nenhuma licenÃ§a ou direito de uso Ã© concedido alÃ©m do necessÃ¡rio
-          para navegaÃ§Ã£o pessoal e informativa.
+          Todo o conteúdo do Site ? incluindo textos, layout, marcas, logotipos, imagens, código
+          e demais materiais ? é de propriedade da CORA Soluç?es Digitais ou de seus licenciadores, salvo
+          indicaç?o em contrário. Nenhuma licença ou direito de uso é concedido além do necessário
+          para navegaç?o pessoal e informativa.
         </p>
       </LegalSection>
 
-      <LegalSection title="5. ServiÃ§os e contrataÃ§Ã£o">
+      <LegalSection title="5. Serviços e contrataç?o">
         <p>
-          As informaÃ§Ãµes publicadas no Site nÃ£o constituem proposta vinculante. Projetos, prazos,
-          escopos e valores sÃ£o definidos exclusivamente em propostas comerciais e contratos
-          especÃ­ficos firmados entre as partes. A VRC Solutions reserva-se o direito de recusar
-          solicitaÃ§Ãµes que nÃ£o estejam alinhadas Ã  sua capacidade operacional ou polÃ­tica comercial.
+          As informaç?es publicadas no Site n?o constituem proposta vinculante. Projetos, prazos,
+          escopos e valores s?o definidos exclusivamente em propostas comerciais e contratos
+          específicos firmados entre as partes. A CORA Soluç?es Digitais reserva-se o direito de recusar
+          solicitaç?es que n?o estejam alinhadas ? sua capacidade operacional ou política comercial.
         </p>
       </LegalSection>
 
-      <LegalSection title="6. LimitaÃ§Ã£o de responsabilidade">
+      <LegalSection title="6. Limitaç?o de responsabilidade">
         <p>
-          Empregamos esforÃ§os razoÃ¡veis para manter o Site disponÃ­vel e atualizado, porÃ©m nÃ£o
-          garantimos ausÃªncia de interrupÃ§Ãµes, erros ou imprecisÃµes. Na extensÃ£o permitida pela lei,
-          a VRC Solutions nÃ£o se responsabiliza por danos indiretos, lucros cessantes ou perdas
+          Empregamos esforços razoáveis para manter o Site disponível e atualizado, porém n?o
+          garantimos aus?ncia de interrupç?es, erros ou imprecis?es. Na extens?o permitida pela lei,
+          a CORA Soluç?es Digitais n?o se responsabiliza por danos indiretos, lucros cessantes ou perdas
           decorrentes do uso ou da impossibilidade de uso do Site.
         </p>
       </LegalSection>
 
       <LegalSection title="7. Links externos">
         <p>
-          O Site pode conter links para sites de terceiros. NÃ£o nos responsabilizamos pelo
-          conteÃºdo, polÃ­ticas ou prÃ¡ticas de sites externos. O acesso a esses links Ã© por sua conta
+          O Site pode conter links para sites de terceiros. N?o nos responsabilizamos pelo
+          conteúdo, políticas ou práticas de sites externos. O acesso a esses links é por sua conta
           e risco.
         </p>
       </LegalSection>
 
       <LegalSection title="8. Privacidade">
         <p>
-          O tratamento de dados pessoais realizado por meio do Site Ã© regido por nossa{" "}
+          O tratamento de dados pessoais realizado por meio do Site é regido por nossa{" "}
           <Link
             to="/politica-de-privacidade"
             className="text-sea underline-offset-4 hover:underline"
           >
-            PolÃ­tica de Privacidade
+            Política de Privacidade
           </Link>
           , que integra estes Termos de Uso.
         </p>
       </LegalSection>
 
-      <LegalSection title="9. AlteraÃ§Ãµes">
+      <LegalSection title="9. Alteraç?es">
         <p>
-          Podemos modificar estes Termos de Uso a qualquer momento. As alteraÃ§Ãµes entram em vigor
-          apÃ³s a publicaÃ§Ã£o nesta pÃ¡gina, com indicaÃ§Ã£o da data de atualizaÃ§Ã£o. O uso continuado do
-          Site apÃ³s as mudanÃ§as implica aceitaÃ§Ã£o dos novos termos.
+          Podemos modificar estes Termos de Uso a qualquer momento. As alteraç?es entram em vigor
+          após a publicaç?o nesta página, com indicaç?o da data de atualizaç?o. O uso continuado do
+          Site após as mudanças implica aceitaç?o dos novos termos.
         </p>
       </LegalSection>
 
-      <LegalSection title="10. LegislaÃ§Ã£o aplicÃ¡vel">
+      <LegalSection title="10. Legislaç?o aplicável">
         <p>
-          Estes Termos de Uso sÃ£o regidos pelas leis da RepÃºblica Federativa do Brasil. Fica eleito
-          o foro da comarca de domicÃ­lio da VRC Solutions, salvo disposiÃ§Ã£o legal em contrÃ¡rio,
-          para dirimir quaisquer controvÃ©rsias decorrentes destes termos.
+          Estes Termos de Uso s?o regidos pelas leis da República Federativa do Brasil. Fica eleito
+          o foro da comarca de domicílio da CORA Soluç?es Digitais, salvo disposiç?o legal em contrário,
+          para dirimir quaisquer controvérsias decorrentes destes termos.
         </p>
       </LegalSection>
 
       <LegalSection title="11. Contato">
         <p>
-          Para dÃºvidas sobre estes Termos de Uso, entre em contato pelo e-mail{" "}
+          Para dúvidas sobre estes Termos de Uso, entre em contato pelo e-mail{" "}
           <a
-            href="mailto:contato@nexora.com.br"
+            href="mailto:tech.cora.dev@gmail.com"
             className="text-sea underline-offset-4 hover:underline"
           >
-            contato@nexora.com.br
+            tech.cora.dev@gmail.com
           </a>
           .
         </p>

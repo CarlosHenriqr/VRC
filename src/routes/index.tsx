@@ -11,17 +11,18 @@ import { Portfolio } from "@/components/landing/Portfolio";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
+import { FEATURES } from "@/lib/features";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VRC Solutions — Engenharia de software sob medida" },
+      { title: "CORA Soluções Digitais — Engenharia de software sob medida" },
       {
         name: "description",
         content:
           "Desenvolvemos sistemas, aplicativos, automações e soluções de IA sob medida para acelerar o crescimento da sua empresa.",
       },
-      { property: "og:title", content: "VRC Solutions — Engenharia de software sob medida" },
+      { property: "og:title", content: "CORA Soluções Digitais — Engenharia de software sob medida" },
       {
         property: "og:description",
         content: "Sistemas, mobile, automações e IA para transformar desafios em resultado.",
@@ -42,7 +43,7 @@ function Index() {
         <Differentials />
         <Services />
         <Stats />
-        <Portfolio />
+        {FEATURES.cases && <Portfolio />}
         <Process />
         <Testimonials />
         <Faq />

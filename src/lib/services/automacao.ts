@@ -6,7 +6,7 @@ export const automacaoService: ServiceContent = {
   name: "Automação",
   caseSolution: "Automação",
   seo: {
-    title: "Automação — VRC Solutions",
+    title: "Automação — CORA Soluções Digitais",
     description:
       "Automação de processos, integrações, bots e orquestração de workflows que reduzem trabalho manual e erros operacionais.",
   },
@@ -57,7 +57,7 @@ export const automacaoService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Automação com engenharia, não gambiarra",
     items: [
       {

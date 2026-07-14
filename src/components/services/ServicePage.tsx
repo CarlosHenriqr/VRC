@@ -6,6 +6,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Cta, Footer } from "@/components/landing/CtaFooter";
 import { getCasesBySolution } from "@/lib/cases";
 import type { ServiceContent } from "@/lib/services/types";
+import { FEATURES } from "@/lib/features";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -32,9 +33,10 @@ function FadeIn({
 }
 
 export function ServicePage({ content }: { content: ServiceContent }) {
-  const cases = content.caseSolution
-    ? getCasesBySolution(content.caseSolution)
-    : [];
+  const cases =
+    FEATURES.cases && content.caseSolution
+      ? getCasesBySolution(content.caseSolution)
+      : [];
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (

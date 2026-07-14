@@ -6,7 +6,7 @@ export const integracaoSistemasService: ServiceContent = {
   name: "Integração de Sistemas",
   caseSolution: "Automação",
   seo: {
-    title: "Integração de Sistemas — VRC Solutions",
+    title: "Integração de Sistemas — CORA Soluções Digitais",
     description:
       "Integração de sistemas via APIs, filas, webhooks e conectores — ERPs, CRMs, gateways e legados falando a mesma língua.",
   },
@@ -57,7 +57,7 @@ export const integracaoSistemasService: ServiceContent = {
     ],
   },
   reasons: {
-    kicker: "Por que a VRC",
+    kicker: "Por que a CORA",
     title: "Integração com engenharia de produção",
     items: [
       {
